@@ -1,0 +1,6 @@
+{
+	"initializationOptions": {
+		"cacheDirectory": "~/.cache/ccls",
+		"logFile": "/tmp/cq.log"
+	}
+}

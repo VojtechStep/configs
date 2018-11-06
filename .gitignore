@@ -1,0 +1,7 @@
+.config/configstore
+.config/dconf
+.config/fish/fishd.AdalbertDEV
+.config/neomutt/mailboxes
+.config/**/node_modules
+.config/pulse
+.config/Slack

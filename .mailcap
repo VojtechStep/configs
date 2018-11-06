@@ -1,0 +1,3 @@
+text/html; qutebrowser %s
+image/*; feh %s
+

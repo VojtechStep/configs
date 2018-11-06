@@ -1,0 +1,35 @@
+set record=~/Mail/Outlook/Sent
+set spoolfile=~/Mail/Outlook/Inbox
+set header_cache=~/.cache/mail_header_cache
+set mbox_type=Maildir
+set folder=~/Mail/Outlook
+mailboxes =INBOX \
+=Sent \
+=Drafts \
+=Junk \
+=Lastfolder
+
+set sort='reverse-date'
+set sidebar_visible=yes
+set pager_index_lines=20
+set sort='reverse-threads'
+set sort_aux='last-date-received'
+
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+mono bold bold
+mono underline underline
+mono indicator reverse
+color normal default default
+color index yellow default '.*'
+color body brightred default '.*'
+
+color sidebar_new yellow default
+
+bind index g noop
+bind index gg first-entry
+
+bind index,pager K sidebar-prev
+bind index,pager J sidebar-next
+bind index,pager l sidebar-open

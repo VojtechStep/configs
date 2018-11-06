@@ -1,0 +1,5 @@
+[credential]
+	helper = /usr/bin/pass-git-helper
+[user]
+	email = vojtechstepancik@outlook.com
+	name = VojtechStep
