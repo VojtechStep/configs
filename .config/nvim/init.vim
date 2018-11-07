@@ -8,6 +8,8 @@ set shiftwidth=4
 set shortmess+=c
 set noshowmode
 
+set conceallevel=2
+
 set undodir=~/.vimundo
 set undofile
 
