@@ -77,6 +77,9 @@ nnoremap <silent> <A-F> :call LanguageClient#textDocument_formatting()<CR>
 Plug 'Shougo/echodoc.vim'
 let g:echodoc_enable_at_startup = 1
 
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'idanarye/vim-vebugger'
+
 " - terminal
 Plug 'dag/vim-fish'
 
