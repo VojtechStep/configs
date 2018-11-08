@@ -20,6 +20,8 @@ abbr -a todo todolist
 
 abbr -a ghub git clone https://github.com/
 
+abbr -a shutdown shutdown now
+
 if status --is-login
 	if test -z "$DISPLAY" -a $XDG_VTNR = 1
 		exec startx
