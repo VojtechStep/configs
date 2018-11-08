@@ -9,6 +9,7 @@ set shortmess+=c
 set noshowmode
 
 set conceallevel=2
+set nowrap
 
 set undodir=~/.vimundo
 set undofile
