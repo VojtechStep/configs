@@ -141,6 +141,7 @@ set gdefault
 set shortmess+=s
 
 set ruler
+set number
 set relativenumber
 
 noremap <leader>p :r !xclip -select clipboard -o<CR>
