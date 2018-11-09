@@ -4,4 +4,5 @@
 .config/neomutt/mailboxes
 .config/**/node_modules
 .config/pulse
+.config/qutebrowser/qsettings
 .config/Slack
