@@ -5,4 +5,5 @@
 .config/**/node_modules
 .config/pulse
 .config/qutebrowser/qsettings
+.config/qutebrowser/autoconfig.yml
 .config/Slack
