@@ -121,6 +121,8 @@ map L $
 
 noremap ; :
 
+inoremap {<CR> {<CR>}<ESC>O
+
 
 " Editor config
 let mapleader = "\<Space>"
