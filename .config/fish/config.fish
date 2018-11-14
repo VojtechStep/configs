@@ -22,6 +22,8 @@ abbr -a ghub git clone https://github.com/
 
 abbr -a shutdown shutdown now
 
+abbr -a acmc g++ -lm -lcrypt -O2 -std=c++11 -pipe -DONLINE_JUDGE -o main ./main.cpp
+
 if status --is-login
 	if test -z "$DISPLAY" -a $XDG_VTNR = 1
 		exec startx
