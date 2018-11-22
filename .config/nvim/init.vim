@@ -108,6 +108,8 @@ nnoremap <silent> <C-j> :wincmd j<CR>
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
+inoremap <expr> <C-l> (pumvisible() ? "\<right>" : "\<CR>")
+
 " Config edit/reload
 noremap <F12> :sp ~/.config/nvim/init.vim<CR>
 noremap <F24> :so ~/.config/nvim/init.vim<CR>
