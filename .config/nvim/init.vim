@@ -33,7 +33,7 @@ let g:rooter_silent_chdir = 1
 
 Plug 'junegunn/fzf.vim'
 Plug 'chaoren/vim-wordmotion'
-Plug 'Townk/vim-autoclose'
+Plug 'Raimondi/delimitMate'
 Plug 'w0rp/ale'
 let g:ale_sign_column_always = 0
 let g:ale_linters = {'rust': ['rls']}
@@ -107,8 +107,6 @@ nnoremap <silent> <C-j> :wincmd j<CR>
 " Use C-j/k to navigate nvm2 suggestions
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-
-inoremap <expr> <C-l> (pumvisible() ? "\<right>" : "\<CR>")
 
 " Config edit/reload
 noremap <F12> :sp ~/.config/nvim/init.vim<CR>
