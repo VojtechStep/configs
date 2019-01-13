@@ -159,7 +159,7 @@ nmap <ESC> :noh<CR>
 
 noremap <F1> <nop>
 
-noremap <C-F> :Rg
+noremap <C-F> :Rg<space>
 noremap <C-P> :Files<CR>
 noremap <leader>; :Buffers<CR>
 
