@@ -4,6 +4,7 @@ set -xg PATH $HOME/.yarn/bin $PATH
 set -xg PATH $HOME/.cargo/bin $PATH
 set -xg PATH $HOME/Projects/go/bin $PATH
 set -xg PATH $HOME/.local/bin $PATH
+set -xg MCU_IDE_DIR /usr/local/mcuxpresso-ide
 set -xg VISUAL nvim
 set -xg EDITOR nvim
 set -xg BROWSER qutebrowser
