@@ -65,7 +65,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 	\ }
 set hidden
 let g:LanguageClient_serverCommands = {
-	\ 'rust': ['env', 'CARGO_TARGET_DIR=~/.cache/cargo-target/rls', 'rls'],
+	\ 'rust': ['env', 'CARGO_TARGET_DIR=$HOME/.cache/cargo-target/rls', 'rls'],
 	\ 'javascript': ['tsserver'],
 	\ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
 	\ 'python': ['~/.local/bin/pyls'],
