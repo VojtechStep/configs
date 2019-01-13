@@ -44,7 +44,7 @@ config.set('fonts.messages.warning', '8pt monospace')
 config.set('fonts.prompts', '8pt monospace')
 config.set('fonts.statusbar', '8pt monospace')
 config.set('fonts.tabs', '8pt monospace')
-config.set('zoom.default', '90%')
+config.set('zoom.default', '125%')
 
 # config.bind('J', 'tab-prev')
 # config.bind('K', 'tab-next')
