@@ -2,6 +2,8 @@ if &shell =~# 'fish$'
 	set shell=sh
 endif
 
+set termguicolors
+
 set tabstop=4
 set shiftwidth=4
 
@@ -40,8 +42,10 @@ let g:ale_linters = {'rust': ['rls']}
 let g:ale_rust_cargo_use_check = 1
 let g:ale_rust_cargo_check_tests = 1
 let g:ale_rust_cargo_use_clippy = 1
-highligh ALEWarning ctermbg=none ctermfg=172 cterm=underline
-highligh ALEError ctermbg=none ctermfg=red cterm=underline
+highligh ALEWarning ctermbg=none ctermfg=172 guifg=Orange cterm=underline gui=undercurl 
+highligh ALEError ctermbg=none ctermfg=red guifg=Red cterm=underline gui=undercurl
+" highligh ALEWarning cterm=undercurl
+" highlight ALEError cterm=undercurl
 
 " - autocomplete
 Plug 'ncm2/ncm2'
