@@ -163,6 +163,15 @@ noremap <C-F> :Rg<space>
 noremap <C-P> :Files<CR>
 noremap <leader>; :Buffers<CR>
 
+map <leader>bb :VBGtoggleBreakpointThisLine<CR>
+map <leader>bl :VBGstepIn<CR>
+map <leader>bj :VBGstepOver<CR>
+map <leader>bh :VBGstepOut<CR>
+map <leader>bB :VBGclearBreakpints<CR>
+
+autocmd FileType python map <buffer> <F5> :VBGstartPDB %
+autocmd FileType python map <buffer> <F10> :VBGcontinue
+
 " Use ripgrep instead of grep
 if executable('rg')
 	set grepprg=rg\ --no-heading\ --vimgrep
