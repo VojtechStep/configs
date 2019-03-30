@@ -21,6 +21,7 @@ abbr -a todo todolist
 
 abbr -a ghub git clone https://github.com/
 
+abbr -a shitdown shutdown now
 abbr -a shutdown shutdown now
 
 abbr -a acmc g++ -lm -lcrypt -O2 -std=c++11 -pipe -DONLINE_JUDGE -o main ./main.cpp
