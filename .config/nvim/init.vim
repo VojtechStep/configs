@@ -91,8 +91,7 @@ let g:echodoc_enable_at_startup = 1
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'idanarye/vim-vebugger'
 
-" - terminal
-Plug 'dag/vim-fish'
+Plug 'jparise/vim-graphql'
 
 Plug 'sheerun/vim-polyglot'
 
