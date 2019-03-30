@@ -1,3 +1,9 @@
 function z -a 'url'
-	curl -s $url --output - | zathura - &
+	if string match -r -q '^https?://' $url
+		curl -s $url --output - | zathura - &
+		disown
+	else
+		zathura $url &
+		disown
+	end
 end
