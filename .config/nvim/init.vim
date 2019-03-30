@@ -143,6 +143,7 @@ let mapleader = "\<Space>"
 filetype plugin indent on
 syntax on
 set autoindent
+set foldmethod=syntax
 
 colors base16-tomorrow-night
 
@@ -167,6 +168,9 @@ noremap <leader>c :w !xclip -select clipboard -i<CR><CR>
 nnoremap <leader><leader> <C-^>
 nnoremap <leader>l :vsp #<CR>
 nnoremap <leader>j :sp #<CR>
+nnoremap <leader>f za
+nnoremap <leader>u zR
+nnoremap <leader>n zM
 nmap <ESC> :noh<CR>
 
 noremap <F1> <nop>
@@ -183,6 +187,9 @@ map <leader>bB :VBGclearBreakpints<CR>
 
 autocmd FileType python map <buffer> <F5> :VBGstartPDB %
 autocmd FileType python map <buffer> <F10> :VBGcontinue
+
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent! loadview
 
 " Use ripgrep instead of grep
 if executable('rg')
