@@ -7,3 +7,8 @@
 .config/qutebrowser/qsettings
 .config/qutebrowser/autoconfig.yml
 .config/Slack
+.config/Code - Insiders
+.config/GraphQL Playground
+.config/onedrive
+.config/nvim/spell
+.config/fish/fish_variables
