@@ -30,7 +30,7 @@ command! W :w suda://%
 " - navigation
 Plug 'airblade/vim-rooter'
 let g:rooter_change_directory_for_non_project_files = 'current'
-let g:rooter_patterns = ['.git/', 'Cargo.tom', 'package.json']
+let g:rooter_patterns = ['.git/', 'Cargo.toml', 'package.json', 'pom.xml']
 let g:rooter_silent_chdir = 1
 
 Plug 'junegunn/fzf.vim'
