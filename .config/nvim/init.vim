@@ -78,10 +78,12 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_settingsPath = '~/.config/nvim/ls-settings.json'
 let g:LanguageClient_autostart = 1
 nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> ge :call LanguageClient#explainErrorAtPoint()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <A-F> :call LanguageClient#textDocument_formatting()<CR>
+nnoremap <silent> <C-I> :call LanguageClient#textDocument_codeAction()<CR>
 
 Plug 'Shougo/echodoc.vim'
 let g:echodoc_enable_at_startup = 1
