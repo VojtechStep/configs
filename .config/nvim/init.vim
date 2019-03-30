@@ -104,6 +104,12 @@ let g:rust_clip_command = 'xclip -select clipboard'
 
 call plug#end()
 
+function! WriteCreatingDirs()
+	execute ':silent !mkdir -p %:h'
+	write
+endfunction
+command! WW call WriteCreatingDirs()
+
 let g:netrw_dirhistmax = 0
 	
 " Buffer navigation
