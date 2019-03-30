@@ -71,6 +71,7 @@ let g:LanguageClient_serverCommands = {
 	\ 'javascript': ['tsserver'],
 	\ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
 	\ 'python': ['~/.local/bin/pyls'],
+	\ 'java': ['jdtls'],
 	\ 'cpp': ['ccls'],
 	\ 'c': ['ccls']
 	\ }
