@@ -54,6 +54,8 @@ Plug 'roxma/nvim-yarp'
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
+Plug 'chriskempson/base16-vim'
+
 " - time tracking
 Plug 'wakatime/vim-wakatime'
 
@@ -133,6 +135,8 @@ let mapleader = "\<Space>"
 filetype plugin indent on
 syntax on
 set autoindent
+
+colors base16-tomorrow-night
 
 set splitright
 set splitbelow
