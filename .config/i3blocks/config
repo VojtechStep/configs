@@ -4,7 +4,7 @@ interval=once
 signal=3
 
 [volume-pulseaudio]
-command=~/Projects/i3blocks-contrib/volume-pulseaudio/volume-pulseaudio -F "VOL \${VOL}%"
+command=~/Projects/i3blocks-contrib/volume-pulseaudio/volume-pulseaudio -F "🔉 \${VOL}% "
 interval=once
 signal=1
 
