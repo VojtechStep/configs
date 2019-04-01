@@ -21,7 +21,7 @@ interval=once
 signal=2
 
 [essid]
-command=~/Projects/i3blocks-contrib/essid/essid
+command=~/.config/i3blocks/essid
 interval=30
 
 [separator]

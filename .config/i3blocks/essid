@@ -1,0 +1,11 @@
+#! /usr/bin/bash
+
+ESSID=$(nmcli | rg -w connected | cut -d" " -f4)
+
+if [ "$ESSID" = "" ]; then
+	echo "No Internet"
+	echo "No Internet"
+else
+	echo $ESSID
+	echo $ESSID
+fi
