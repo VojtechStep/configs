@@ -1,5 +1,7 @@
 #! /usr/bin/fish
 
+# Use my version of sp (implements the playback status detection feature) https://gist.github.com/VojtechStep/45db95661748541ec96921b67f3670ad
+
 set metadata (sp metadata)
 set sp_status (sp status)
 
