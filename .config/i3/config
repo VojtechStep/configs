@@ -73,6 +73,9 @@ bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ t
 bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ +1000 && pkill -RTMIN+1 i3blocks"
 bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ -1000 && pkill -RTMIN+1 i3blocks"
 
+bindsym XF86MonBrightnessDown exec --no-startup-id "~/.config/scripts/display_adj.sh - && pkill -RTMIN+4 i3blocks"
+bindsym XF86MonBrightnessUp exec --no-startup-id "~/.config/scripts/display_adj.sh + && pkill -RTMIN+4 i3blocks"
+
 bindsym $win+space exec --no-startup-id "xkblayout-state set +1; pkill -RTMIN+2 i3blocks"
 
 # start a terminal
