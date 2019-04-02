@@ -166,6 +166,7 @@ set relativenumber
 
 noremap <leader>p :r !xclip -select clipboard -o<CR>
 noremap <leader>y :w !xclip -select clipboard -i<CR><CR>
+vnoremap <leader>y "+y
 nnoremap <leader><leader> <C-^>
 nnoremap <leader>l :vsp #<CR>
 nnoremap <leader>j :sp #<CR>
