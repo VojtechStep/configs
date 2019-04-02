@@ -22,6 +22,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " - editing
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'airblade/vim-gitgutter'
 
 " :w !sudo tee % doesnt work in neovim
 Plug 'lambdalisue/suda.vim'
