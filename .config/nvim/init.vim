@@ -111,7 +111,7 @@ function! WriteCreatingDirs()
 endfunction
 command! WW call WriteCreatingDirs()
 
-command! -nargs=1 E :e %:h/<args>
+command! -nargs=? E :e %:h/<args>
 
 let g:netrw_dirhistmax = 0
 	
