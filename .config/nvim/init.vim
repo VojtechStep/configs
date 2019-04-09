@@ -175,6 +175,7 @@ nnoremap <leader>j :sp #<CR>
 nnoremap <leader>f za
 nnoremap <leader>u zR
 nnoremap <leader>n zM
+nnoremap <leader>ca :%bd\|e#\|bd#<CR>
 nmap <ESC> :noh<CR>
 
 noremap <F1> <nop>
