@@ -38,24 +38,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'chaoren/vim-wordmotion'
 Plug 'Raimondi/delimitMate'
-Plug 'w0rp/ale'
-let g:ale_sign_column_always = 0
-let g:ale_linters = {'rust': ['rls']}
-let g:ale_rust_cargo_use_check = 1
-let g:ale_rust_cargo_check_tests = 1
-let g:ale_rust_cargo_use_clippy = 1
-highligh ALEWarning ctermbg=none ctermfg=172 guifg=Orange cterm=underline gui=undercurl 
-highligh ALEError ctermbg=none ctermfg=red guifg=Red cterm=underline gui=undercurl
-" highligh ALEWarning cterm=undercurl
-" highlight ALEError cterm=undercurl
 
 " - autocomplete
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-
-autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
+" - theme
 Plug 'chriskempson/base16-vim'
 
 " - time tracking
@@ -63,32 +50,32 @@ Plug 'wakatime/vim-wakatime'
 
 " Languages
 " - interface
-Plug 'autozimu/LanguageClient-neovim', {
-	\ 'branch': 'next',
-	\ 'do': 'bash install.sh',
-	\ }
-set hidden
-let g:LanguageClient_serverCommands = {
-	\ 'rust': ['env', 'CARGO_TARGET_DIR=$HOME/.cache/cargo-target/rls', 'rls'],
-	\ 'javascript': ['tsserver'],
-	\ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-	\ 'python': ['~/.local/bin/pyls'],
-	\ 'java': ['jdtls'],
-	\ 'cpp': ['ccls'],
-	\ 'c': ['ccls']
-	\ }
-let g:LanguageClient_settingsPath = '~/.config/nvim/ls-settings.json'
-let g:LanguageClient_autostart = 1
-nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> ge :call LanguageClient#explainErrorAtPoint()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-nnoremap <silent> <A-F> :call LanguageClient#textDocument_formatting()<CR>
-nnoremap <silent> <C-I> :call LanguageClient#textDocument_codeAction()<CR>
+Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#build() } }
 
-Plug 'Shougo/echodoc.vim'
-let g:echodoc_enable_at_startup = 1
+set hidden
+
+" - code keybindings
+inoremap <silent> <expr> <C-Space> coc#refresh()
+inoremap <silent> <C-d> <C-O>:call CocActionAsync('showSignatureHelp')<CR>
+
+nmap <silent> gh :call CocAction('doHover')<CR>
+nmap <silent> ge <Plug>(coc-diagnostic-info)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <F2> <Plug>(coc-rename)
+nmap <silent> <A-F> <Plug>(coc-format)
+nmap <silent> <C-I> <Plug>(coc-codeaction)
+nmap <silent> <C-,> <Plug>(coc-fix-current)
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'idanarye/vim-vebugger'
@@ -117,21 +104,17 @@ command! -nargs=? E :e %:h/<args>
 let g:netrw_dirhistmax = 0
 	
 " Buffer navigation
-nnoremap <silent> <C-l> :wincmd l<CR>
-nnoremap <silent> <C-h> :wincmd h<CR>
-nnoremap <silent> <C-k> :wincmd k<CR>
-nnoremap <silent> <C-j> :wincmd j<CR>
-
-" Use C-j/k to navigate nvm2 suggestions
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+nmap <silent> <C-l> :wincmd l<CR>
+nmap <silent> <C-h> :wincmd h<CR>
+nmap <silent> <expr> <C-k> coc#util#has_float() && coc#util#float_scrollable() ? ":call coc#util#float_scroll(0)<CR>" : ":wincmd k<CR>"
+imap <silent> <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+nmap <silent> <expr> <C-j> coc#util#has_float() && coc#util#float_scrollable() ? ":call coc#util#float_scroll(1)<CR>" : ":wincmd j<CR>"
+imap <silent> <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <silent> <expr> <C-l> pumvisible() ? "<C-y>" : "\<C-l>"
 
 " Config edit/reload
-noremap <F12> :sp ~/.config/nvim/init.vim<CR>
-noremap <F24> :so ~/.config/nvim/init.vim<CR>
-
-noremap <F8> :ALENext<CR>
-noremap <F20> :ALEPrevious<CR>
+noremap <silent> <F12> :sp ~/.config/nvim/init.vim<CR>
+noremap <silent> <F24> :so ~/.config/nvim/init.vim<CR>
 
 " H/L goto start/end of line
 map H ^
@@ -161,7 +144,7 @@ set incsearch
 set ignorecase
 set smartcase
 set gdefault
-set shortmess+=s
+set shortmess+=sc
 
 set ruler
 set number
@@ -177,7 +160,7 @@ nnoremap <leader>f za
 nnoremap <leader>u zR
 nnoremap <leader>n zM
 nnoremap <leader>ca :%bd\|e#\|bd#<CR>
-nmap <ESC> :noh<CR>
+nmap <silent> <expr> <ESC> coc#util#has_float() ? ":call coc#util#float_hide()<CR>" : ":noh<CR>"
 
 noremap <F1> <nop>
 
@@ -196,6 +179,20 @@ autocmd FileType python map <buffer> <F10> :VBGcontinue
 
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview
+
+set updatetime=300
+autocmd CursorHold * call CocActionAsync('highlight')
+
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+let s:red_color="#bb0000"
+let s:orange_color="#ba5d00"
+
+exec "highlight CocErrorHighlight gui=undercurl guifg=" . s:red_color
+exec "highlight CocErrorSign guifg=" . s:red_color
+exec "highlight CocWarningHighlight gui=undercurl guifg=" . s:orange_color
+exec "highlight CocWarningSign guifg=" . s:orange_color
+
 
 " Use ripgrep instead of grep
 if executable('rg')

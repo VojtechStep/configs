@@ -1,0 +1,24 @@
+{
+	"suggest.echodocSupport": true,
+	"suggest.enablePreview": true,
+	"diagnostic.messageTarget": "float",
+	"signature.target": "float",
+	"coc.preferences.hoverTarget": "float",
+	"suggest.acceptSuggestionOnCommitCharacter": true,
+	"codeLens.enable": true,
+	"languageserver": {
+		"hie": {
+			"command": "hie-wrapper",
+			"filetypes": ["haskell"]
+		},
+		"ccls": {
+			"command": "ccls",
+			"filetypes": ["c", "cpp"],
+			"initializationOptions": {
+				"cache": {
+					"directory": "/tmp/ccls"
+				}
+			}
+		}
+	}
+}

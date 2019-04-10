@@ -11,4 +11,7 @@
 .config/GraphQL Playground
 .config/onedrive
 .config/nvim/spell
+.config/coc/extensions/coc-java-data
+.config/coc/memos.json
+.config/coc/history.json
 .config/fish/fish_variables
