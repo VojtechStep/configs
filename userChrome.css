@@ -1,0 +1,101 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* tabs on bottom of window */
+
+#navigator-toolbox {
+  -moz-box-ordinal-group: 10;
+}
+
+#titlebar {
+  -moz-box-ordinal-group: 10;
+}
+
+#PopupAutoCompleteRichResult {
+  margin-top: -35vh;
+}
+
+#PopupAutoCompleteRichResult > hbox {
+  display: none;
+}
+
+.tab-background {
+  border-top: none !important;
+}
+
+#navigator-toolbox::after {
+  display: none !important;
+}
+
+#TabsToolbar .tabbrowser-arrowscrollbox,
+#tabbrowser-tabs,
+.tab-stack {
+  min-height: 28px !important;
+}
+
+#tabbrowser-tabs {
+  --tab-line-color: unset !important;
+}
+
+#window-controls {
+  display: none !important;
+}
+
+.urlbar-icon {
+  display: none !important;
+}
+
+.urlbar-input-box {
+  text-align: right !important;
+  font-size: 22px;
+}
+
+tab {
+  max-width: unset !important;
+  color: white !important;
+  font-size: 18px;
+}
+
+.tabs-newtab-button {
+  display: none;
+}
+
+.tab-content {
+  padding: 0 5px;
+}
+
+tab:not(:hover) .tab-close-button {
+  display: none;
+}
+
+tab:nth-child(even) {
+  background: rgb(118, 118, 118) !important;
+}
+
+tab:nth-child(odd) {
+  background: rgb(174, 174, 174) !important;
+}
+
+#identity-box *:not(#connection-icon) {
+  display: none;
+}
+
+statuspanel[type="overLink"],
+#statuspanel[type="overLink"] {
+  display: none !important;
+}
+
+:root:not([customizing]) #navigator-toolbox:not(:hover):not(:focus-within) #nav-bar {
+  max-height: 0;
+  min-height: 0!important;
+  --tridactyl-auto-show-zone: 10px;
+  margin-bottom: calc(-1 * var(--tridactyl-auto-show-zone));
+  opacity: 0;
+}
+
+#navigator-toolbox:not(:hover):not(:focus-within) #toolbar-menubar > * {
+  background-color: rgb(232, 232, 231);
+}
+
+#main-window[sizemode="maximized"] #content-deck {
+  padding-top: 8px;
+}
