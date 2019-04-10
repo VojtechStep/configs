@@ -34,6 +34,7 @@ let g:rooter_change_directory_for_non_project_files = 'current'
 let g:rooter_patterns = ['.git/', 'Cargo.toml', 'package.json', 'pom.xml']
 let g:rooter_silent_chdir = 1
 
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'chaoren/vim-wordmotion'
 Plug 'Raimondi/delimitMate'
