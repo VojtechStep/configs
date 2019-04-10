@@ -37,7 +37,9 @@ let g:rooter_silent_chdir = 1
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'chaoren/vim-wordmotion'
+
 Plug 'Raimondi/delimitMate'
+let delimitMate_expand_cr = 1
 
 " - autocomplete
 set completeopt=noinsert,menuone,noselect
@@ -121,8 +123,6 @@ map H ^
 map L $
 
 noremap ; :
-
-inoremap {<CR> {<CR>}<ESC>O
 
 
 " Editor config
