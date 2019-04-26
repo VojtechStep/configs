@@ -29,5 +29,8 @@ case $1 in
 			adjust
 		fi
 		;;
+	=)
+		adjust
+		;;
 esac
 
