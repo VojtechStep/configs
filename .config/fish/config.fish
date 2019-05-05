@@ -7,7 +7,7 @@ set -xg PATH $HOME/.local/bin $PATH
 set -xg MCU_IDE_DIR /usr/local/mcuxpresso-ide
 set -xg VISUAL nvim
 set -xg EDITOR nvim
-set -xg BROWSER qutebrowser
+set -xg BROWSER firefox
 
 set -U fish_user_paths
 
