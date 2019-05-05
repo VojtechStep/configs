@@ -24,5 +24,11 @@
 			"command": "dart_language_server",
 			"filetypes": ["dart"]
 		}
-	}
+	},
+	"java.referencesCodeLens.enabled": true,
+	"java.signatureHelp.enabled": true,
+	"java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+	"java.format.comments.enabled": false,
+	"java.completion.guessMethodArguments": true,
+	"rust.clippy_preference": "on"
 }

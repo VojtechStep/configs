@@ -52,7 +52,7 @@ Plug 'wakatime/vim-wakatime'
 
 " Languages
 " - interface
-Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#build() } }
+Plug 'neoclide/coc.nvim', { 'do': './install.sh nightly' }
 
 set hidden
 
