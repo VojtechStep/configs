@@ -19,6 +19,10 @@
 					"directory": "/tmp/ccls"
 				}
 			}
+		},
+		"dart_language_server": {
+			"command": "dart_language_server",
+			"filetypes": ["dart"]
 		}
 	}
 }

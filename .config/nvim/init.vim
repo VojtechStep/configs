@@ -83,6 +83,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'idanarye/vim-vebugger'
 
 Plug 'jparise/vim-graphql'
+Plug 'thosakwe/vim-flutter'
 
 Plug 'sheerun/vim-polyglot'
 

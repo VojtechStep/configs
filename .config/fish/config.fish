@@ -1,10 +1,12 @@
 set -xg GDK_SCALE 2
-set -xg GOPATH ~/Projects/go
 set -xg PATH $HOME/.yarn/bin $PATH
 set -xg PATH $HOME/.cargo/bin $PATH
-set -xg PATH $HOME/Projects/go/bin $PATH
 set -xg PATH $HOME/.local/bin $PATH
+set -xg PATH $HOME/.pub-cache/bin $PATH
+set -xg PATH /opt/android-sdk/tools/bin $PATH
+set -xg PATH /opt/android-sdk/platform-tools $PATH
 set -xg MCU_IDE_DIR /usr/local/mcuxpresso-ide
+set -xg ANDROID_HOME /opt/android-sdk
 set -xg VISUAL nvim
 set -xg EDITOR nvim
 set -xg BROWSER firefox
