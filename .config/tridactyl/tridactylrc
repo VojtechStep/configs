@@ -17,6 +17,8 @@ bind gO current_url tabopen
 bind <Space><Space> tab #
 bind <Space>; fillcmdline tab
 
+bind x composite tabnext; tabclose; tab #
+
 set csp clobber
 set hintuppercase false
 colors dark
