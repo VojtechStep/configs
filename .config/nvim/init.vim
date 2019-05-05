@@ -7,6 +7,8 @@ set termguicolors
 set tabstop=2
 set shiftwidth=2
 
+autocmd FileType haskell set expandtab
+
 set shortmess+=c
 set noshowmode
 
@@ -16,11 +18,13 @@ set nowrap
 set undodir=~/.vimundo
 set undofile
 
+set pyxversion=3
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Vim enhancements
 " - editing
-Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
 
@@ -60,27 +64,25 @@ set hidden
 inoremap <silent> <expr> <C-Space> coc#refresh()
 inoremap <silent> <C-d> <C-O>:call CocActionAsync('showSignatureHelp')<CR>
 
-nmap <silent> gh :call CocAction('doHover')<CR>
+nmap <silent> gh :call CocActionAsync('doHover')<CR>
 nmap <silent> ge <Plug>(coc-diagnostic-info)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> <F2> <Plug>(coc-rename)
 nmap <silent> <A-F> <Plug>(coc-format)
-nmap <silent> <C-I> <Plug>(coc-codeaction)
+nmap <silent> <Tab> <Plug>(coc-codeaction)
 nmap <silent> <C-,> <Plug>(coc-fix-current)
+nmap <silent> <F8> <Plug>(coc-diagnostic-next)
+nmap <silent> <F20> <Plug>(coc-diagnostic-prev)
 
 function! s:show_documentation()
   if &filetype == 'vim'
     execute 'h '.expand('<cword>')
   else
-    call CocAction('doHover')
+    call CocActionAsync('doHover')
   endif
 endfunction
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'idanarye/vim-vebugger'
 
 Plug 'jparise/vim-graphql'
 Plug 'thosakwe/vim-flutter'
@@ -105,6 +107,7 @@ command! WW call WriteCreatingDirs()
 command! -nargs=? E :e %:h/<args>
 
 let g:netrw_dirhistmax = 0
+let g:netrw_liststyle = 3
 	
 " Buffer navigation
 nmap <silent> <C-l> :wincmd l<CR>
@@ -155,28 +158,27 @@ noremap <leader>p :r !xclip -select clipboard -o<CR>
 noremap <leader>y :w !xclip -select clipboard -i<CR><CR>
 vnoremap <leader>y "+y
 nnoremap <leader><leader> <C-^>
-nnoremap <leader>l :vsp #<CR>
-nnoremap <leader>j :sp #<CR>
+nnoremap <leader>l :vsp<CR>
+nnoremap <leader>j :sp<CR>
 nnoremap <leader>f za
 nnoremap <leader>u zR
 nnoremap <leader>n zM
-nnoremap <leader>ca :%bd\|e#\|bd#<CR>
+nnoremap <leader>ca :%bd<bar>e#<bar>bd#<CR>
+nnoremap <leader>cc :b#<bar>bd#<CR>
 nmap <silent> <expr> <ESC> coc#util#has_float() ? ":call coc#util#float_hide()<CR>" : ":noh<CR>"
+
+tmap <C-H> <C-\><C-N>:wincmd h<CR>
+tmap <C-L> <C-\><C-N>:wincmd l<CR>
+
+map <leader><BS> :vsp term://fish<CR>
 
 noremap <F1> <nop>
 
 noremap <C-F> :Rg<space>
-noremap <C-P> :Files<CR>
+noremap <expr> <C-P> len(system('git rev-parse')) ? ":Files\<CR>" : ":GFiles --exclude-standard --others --cached\<CR>"
 noremap <leader>; :Buffers<CR>
-
-map <leader>bb :VBGtoggleBreakpointThisLine<CR>
-map <leader>bl :VBGstepIn<CR>
-map <leader>bj :VBGstepOver<CR>
-map <leader>bh :VBGstepOut<CR>
-map <leader>bB :VBGclearBreakpints<CR>
-
-autocmd FileType python map <buffer> <F5> :VBGstartPDB %
-autocmd FileType python map <buffer> <F10> :VBGcontinue
+noremap <leader>g :GFiles?<CR>
+noremap <leader>hh :Helptags<CR>
 
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview
@@ -193,7 +195,10 @@ exec "highlight CocErrorHighlight gui=undercurl guifg=" . s:red_color
 exec "highlight CocErrorSign guifg=" . s:red_color
 exec "highlight CocWarningHighlight gui=undercurl guifg=" . s:orange_color
 exec "highlight CocWarningSign guifg=" . s:orange_color
+highlight CocHighlightText guibg=#373b61
 
+exec "highlight ExtraWhitespace guibg=" . s:red_color
+match ExtraWhitespace /\s\+$/
 
 " Use ripgrep instead of grep
 if executable('rg')

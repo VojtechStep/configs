@@ -1,5 +1,5 @@
 {
-	"suggest.echodocSupport": true,
+	"suggest.echodocSupport": false,
 	"suggest.enablePreview": true,
 	"diagnostic.messageTarget": "float",
 	"signature.target": "float",
