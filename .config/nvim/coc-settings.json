@@ -9,11 +9,16 @@
 	"languageserver": {
 		"hie": {
 			"command": "hie-wrapper",
-			"filetypes": ["haskell"]
+			"filetypes": [
+				"haskell"
+			]
 		},
 		"ccls": {
 			"command": "ccls",
-			"filetypes": ["c", "cpp"],
+			"filetypes": [
+				"c",
+				"cpp"
+			],
 			"initializationOptions": {
 				"cache": {
 					"directory": "/tmp/ccls"
@@ -22,7 +27,9 @@
 		},
 		"dart_language_server": {
 			"command": "dart_language_server",
-			"filetypes": ["dart"]
+			"filetypes": [
+				"dart"
+			]
 		}
 	},
 	"java.referencesCodeLens.enabled": true,
@@ -30,5 +37,13 @@
 	"java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
 	"java.format.comments.enabled": false,
 	"java.completion.guessMethodArguments": true,
-	"rust.clippy_preference": "on"
+	"rust.clippy_preference": "on",
+	"coc.preferences.formatOnType": true,
+	"coc.preferences.formatOnSaveFiletypes": [
+		"rust",
+		"java",
+		"haskell",
+		"javascript"
+	],
+	"coc.preferences.currentFunctionSymbolAutoUpdate": true
 }
