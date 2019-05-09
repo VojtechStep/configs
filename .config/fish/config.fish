@@ -1,4 +1,5 @@
 set -xg GDK_SCALE 2
+set -xg PATH $HOME/.fzf/bin $PATH
 set -xg PATH $HOME/.yarn/bin $PATH
 set -xg PATH $HOME/.cargo/bin $PATH
 set -xg PATH $HOME/.local/bin $PATH
