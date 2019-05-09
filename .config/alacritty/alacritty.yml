@@ -88,19 +88,19 @@ tabspaces: 4
 font:
   # Normal (roman) font face
   normal:
-    family: "Fira Code, Material Design Icons, Font Awesome 5 Free"
+    family: "Fira Code"
     # The `style` can be specified to pick a specific face.
     # style: Regular
 
   # Bold font face
   bold:
-    family: "Fira Code, Wuncon Siji"
+    family: "Fira Code"
     # The `style` can be specified to pick a specific face.
     style: Bold
 
   # Italic font face
   italic:
-    family: "Fira Code, Wuncon Siji"
+    family: "Fira Code"
     # The `style` can be specified to pick a specific face.
     # style: Italic
 
