@@ -257,6 +257,10 @@ set number
 " ... and show relative line number on other lines
 set relativenumber
 
+" Enable mouse in normal and insert mode
+" It's only for the terminal, I swear
+set mouse=ni
+
 " Render tabs as 2 spaces, but still use tabs
 set tabstop=2
 set shiftwidth=2
