@@ -70,6 +70,8 @@ exec --no-startup-id ~/.config/scripts/display_adj.sh =
 
 assign [class="Firefox"] $ws2
 
+for_window [class="Dragon"] sticky enable
+
 # player controls
 bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute $(pactl list sinks short | rg -w RUNNING | cut -f1) toggle && pkill -RTMIN+1 i3blocks"
 bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume $(pactl list sinks short | rg -w RUNNING | cut -f1) +1000 && pkill -RTMIN+1 i3blocks"
