@@ -174,11 +174,11 @@ noremap <leader>v :UndotreeShow<CR>
 
 function! s:setup_undotree_bindings()
 	" Go to last change
-	nmap U ggjj<CR>
+	nmap <buffer> U ggjj<CR>
 	" Close window
-	nmap <ESC> q
+	nmap <buffer> <ESC> q
 	" Bad things happen when you do :q
-	nmap :q q
+	nmap <buffer> :q q
 endfunction
 
 augroup undotree_keybindings
