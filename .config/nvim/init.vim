@@ -287,7 +287,7 @@ set noexpandtab
 " ... Except for Haskell. Use spaces in Haskell. Because Haskell
 augroup filetype_options
 	autocmd!
-	autocmd FileType haskell set expandtab
+	autocmd FileType haskell,fsharp set expandtab
 augroup END
 
 " Disable netrw history
