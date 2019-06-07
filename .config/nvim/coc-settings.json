@@ -38,7 +38,8 @@
 		"rust",
 		"java",
 		"haskell",
-		"javascript"
+		"javascript",
+		"javascript.jsx"
 	],
 	"coc.preferences.currentFunctionSymbolAutoUpdate": true
 }
