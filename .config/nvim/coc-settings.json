@@ -41,5 +41,7 @@
 		"javascript",
 		"javascript.jsx"
 	],
-	"coc.preferences.currentFunctionSymbolAutoUpdate": true
+	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
+	"rust.all_targets": false,
+	"git.addGlameToVirtualText": true
 }
