@@ -73,10 +73,13 @@ Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'sheerun/vim-polyglot'
 
 " GraphQL schema
-Plug 'jparise/vim-graphql'
+Plug 'jparise/vim-graphql', { 'for': 'graphqls' }
 
 " Flutter
-Plug 'thosakwe/vim-flutter'
+Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
+
+" XML Editing nicities
+Plug 'sukima/xmledit', { 'for': 'xml' }
 
 
 " Misc plugins
