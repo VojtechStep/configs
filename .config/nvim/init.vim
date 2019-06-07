@@ -120,7 +120,9 @@ nmap <silent> <A-F> <Plug>(coc-format)
 " Format selection
 vmap <silent> <A-F> <Plug>(coc-format-selected)
 " Show code actions
-nmap <silent> <Tab> <Plug>(coc-codeaction)
+nmap <silent> <Tab> :CocAction<CR>
+" Show codelens actions
+nmap <silent> <leader>c <Plug>(coc-codelens-action)
 " Do quickfix
 nmap <silent> <leader>q <Plug>(coc-fix-current)
 " Jump to next warning/error
