@@ -22,7 +22,7 @@ Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-commentary'
 
 "	Git changes
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 
 " Undo branch visualizer
 Plug 'mbbill/undotree'
