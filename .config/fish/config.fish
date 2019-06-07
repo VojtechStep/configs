@@ -20,8 +20,6 @@ abbr -a vim nvim
 abbr -a ls exa -l
 abbr -a la exa -la
 
-abbr -a todo todolist
-
 abbr -a ghub git clone https://github.com/
 
 abbr -a shitdown shutdown now
@@ -36,7 +34,7 @@ if status --is-login
 end
 
 if test -f $HOME/.autojump/share/autojump/autojump.fish
-	source /home/adalbert/.autojump/share/autojump/autojump.fish
+	source $HOME/.autojump/share/autojump/autojump.fish
 end
 
-type nvm >/dev/null ^/dev/null; and nvm use 10
+type nvm >/dev/null ^/dev/null; and nvm use 12
