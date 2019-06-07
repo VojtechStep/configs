@@ -9,7 +9,7 @@ else
 	LEVEL=1
 fi
 
-function adjust {
+adjust(){
 	xrandr | rg -w connected | cut -d" " -f1 | xargs -L1 -I{} xrandr --output {} --brightness $LEVEL
 	echo $LEVEL > $CONFIG
 }
@@ -20,6 +20,8 @@ case $1 in
 		if [ "$(echo "$NEW_LEVEL <= 1" | bc)" -eq 1 ]; then
 			LEVEL=$NEW_LEVEL
 			adjust
+		else
+			exit 1
 		fi
 		;;
 	-)
@@ -27,6 +29,8 @@ case $1 in
 		if [ "$(echo "$NEW_LEVEL >= 0.1" | bc)" -eq 1 ]; then
 			LEVEL=$NEW_LEVEL
 			adjust
+		else
+			exit 1
 		fi
 		;;
 	=)
