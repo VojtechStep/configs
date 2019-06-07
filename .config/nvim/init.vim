@@ -29,16 +29,16 @@ Plug 'mbbill/undotree'
 let g:undotree_SetFocusWhenToggle = 1
 
 "	Distractionless editing
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-let g:goyo_height = '90%'
-let g:goyo_width = 100
+" Plug 'junegunn/goyo.vim'
+" Plug 'junegunn/limelight.vim'
+" let g:goyo_height = '90%'
+" let g:goyo_width = 100
 
 "	Count different casings as words
 Plug 'chaoren/vim-wordmotion'
 
 "	Japanese input
-Plug 'tyru/eskk.vim'
+" Plug 'tyru/eskk.vim'
 
 "	Complete paired characters: (,[,{,< etc
 Plug 'Raimondi/delimitMate'
