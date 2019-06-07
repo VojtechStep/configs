@@ -4,11 +4,18 @@ setxkbmap -option caps:ctrl_modifier
 unclutter &
 
 xrandr --dpi 315
-xinput set-prop 11 'libinput Accel Speed' 0.5
-xinput set-prop 11 'libinput Tapping Enabled' 1
-xinput set-prop 11 'libinput Natural Scrolling Enabled' 1
+~/.config/scripts/monitor_setup.sh &
+~/.config/scripts/display_adj.sh &
+~/.config/scripts/touchpad_setup.sh &
+~/.config/scripts/dwm_status.sh &
 setxkbmap -layout us,cz
 
 ~/.fehbg &
 # exec compton &
-exec i3
+# exec i3
+
+termite &
+firefox &
+xbindkeys
+
+exec dwm
