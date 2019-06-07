@@ -38,6 +38,19 @@ refresh_essid() {
 	fi
 }
 
+refresh_vol() {
+	active=$(pacmd list-sinks | rg -w RUNNING -A7)
+	if [ "$active" = "" ]; then
+		active=$(pacmd list-sinks | rg -w volume -A4)
+	fi
+	muted=$(echo "$active" | rg -e "muted: (\w*)" -or "\$1")
+	if [ "$muted" = "yes" ]; then
+		vol="(mute)"
+	else
+		vol=$(echo "$active" | rg -e "volume: front-left.*?/\s*(\d{2,3}%)" -or "\$1")
+	fi
+}
+
 # Updates all the blocks, then redraws
 refresh_all(){
 	refresh_kbd
@@ -45,6 +58,7 @@ refresh_all(){
 	refresh_bright
 	refresh_batt
 	refresh_essid
+	refresh_vol
 	redraw
 }
 
@@ -68,6 +82,9 @@ trap "refresh_kbd && redraw" RTMIN+2
 
 # RTMIN+3 -> refresh brightness
 trap "refresh_bright && redraw" RTMIN+3
+
+# RTMIN+4 -> refresh volume
+trap "refresh_vol && redraw" RTMIN+4
 
 # Start by refreshing all
 refresh_all
