@@ -3,7 +3,7 @@
 .config/**/node_modules
 .config/pulse
 .config/nvim/spell
-.config/coc/extensions/coc-java-data
-.config/coc/memos.json
-.config/coc/history.json
+.config/coc/*
+!.config/coc/extensions/package.json
+!.config/coc/extensions/yarn.lock
 .config/fish/fish_variables
