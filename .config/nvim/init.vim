@@ -241,6 +241,7 @@ noremap ; :
 
 " Operate on system clipboard
 noremap <leader>p :r !xclip -select clipboard -o<CR>
+vnoremap <leader>p "+p
 noremap <leader>y :w !xclip -select clipboard -i<CR><CR>
 vnoremap <leader>y "+y
 
