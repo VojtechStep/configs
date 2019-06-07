@@ -191,6 +191,18 @@ augroup undotree_keybindings
 	autocmd FileType undotree :call <SID>setup_undotree_bindings()
 augroup END
 
+function! s:setup_netrw_bindings()
+	unmap <buffer> q
+	nmap <buffer> q :bw<CR>
+	nmap <buffer> <ESC> q
+	nmap <buffer> :q q
+endfunction
+
+augroup netrw_keybindings
+	autocmd!
+	autocmd FileType netrw :call <SID>setup_netrw_bindings()
+augroup END
+
 " Close others
 nnoremap <leader>ca :%bd<bar>e#<bar>bd#<CR>
 " Close buffer
