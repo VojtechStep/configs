@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+state="running"
 date=""
 kbd=""
 bri=""
@@ -12,7 +13,7 @@ essid=""
 
 # Updates the date block
 refresh_date(){
-	date=$(date +%T)
+	date=$(date +%H:%m)
 }
 
 # Updates the keyboard layout block
@@ -71,20 +72,26 @@ refresh_periodic(){
 
 # Performs the status bar redraw
 redraw(){
-	xsetroot -name " $kbd | ☀️ $bri | 🔉 $vol |  $essid | $batt | $date "
+	if [ "$state" = "running" ]; then
+		xsetroot -name " $kbd | ☀️ $bri | 🔉 $vol |  $essid | $batt | $date "
+	fi
 }
 
 # RMIN+1 -> refresh all
-trap "refresh_all && redraw" RTMIN+1
+trap "refresh_all; redraw" RTMIN+1
 
 # RTMIN+2 -> refresh keyboard
-trap "refresh_kbd && redraw" RTMIN+2
+trap "refresh_kbd; redraw" RTMIN+2
 
 # RTMIN+3 -> refresh brightness
-trap "refresh_bright && redraw" RTMIN+3
+trap "refresh_bright; redraw" RTMIN+3
 
 # RTMIN+4 -> refresh volume
-trap "refresh_vol && redraw" RTMIN+4
+trap "refresh_vol; redraw" RTMIN+4
+
+trap "state=paused" RTMIN+5
+
+trap "state=running" RTMIN+6
 
 # Start by refreshing all
 refresh_all
@@ -92,7 +99,7 @@ refresh_all
 while :
 do
 	# Sleep for 5 seconds while also receiving signals
-	sleep 5 &
+	sleep 1m &
 	wait $!
 	refresh_periodic
 done
