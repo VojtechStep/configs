@@ -23,19 +23,26 @@ Plug 'machakann/vim-sandwich'
 " Commenting
 Plug 'tpope/vim-commentary'
 
-
 " Count different casings as words
 Plug 'chaoren/vim-wordmotion'
 
+" Text alignment
+Plug 'godlygeek/tabular'
+
+" UNIX helpers
+Plug 'tpope/vim-eunuch'
 
 " Complete paired characters: (,[,{,< etc
+let g:delimitMate_expand_cr = 2
+let g:delimitMate_expand_space = 1
+" let g:delimitMate_smart_quotes = "\w\%#"
+" let g:delimitMate_matchpairs = "(:),{:},[:],<:>"
+" let g:delimitMate_quotes = "\" ' `"
 Plug 'Raimondi/delimitMate'
-let delimitMate_expand_cr = 1
 
 " Save as root
 Plug 'lambdalisue/suda.vim'
 command! W :w suda://%
-
 
 " Navigation plugins
 " ==============================================================================
@@ -49,7 +56,6 @@ Plug 'airblade/vim-rooter'
 " Fuzzy search in project files, open files
 Plug '/usr/share/vim/vimfiles' " Managed via pacman
 Plug 'junegunn/fzf.vim'
-
 
 " Languages
 " ==============================================================================
@@ -103,7 +109,18 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'chriskempson/base16-vim'
 
 " WakaTime time tracking
+if executable("wakatime")
+  let g:wakatime_OverrideCommandPrefix = exepath("wakatime")
+endif
 Plug 'wakatime/vim-wakatime'
+
+" Pretty status line
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+
+Plug 'itchyny/lightline.vim'
+
+Plug 'jreybert/vimagit'
 
 let g:org_agenda_files = ["~/org/index.org"]
 let g:org_indent = 1
@@ -282,11 +299,6 @@ nnoremap <leader>cc :bw<CR>
 " Hide popup or stop highlight
 nmap <silent> <expr> <ESC> coc#util#has_float() ? ":call coc#util#float_hide()<CR>" : ":noh<CR>"
 
-" ESC only closes popup in insert mode, press again to enter normal mode
-" (Still undecided on which behaviour I want)
-"
-" imap <silent> <expr> <ESC> pumvisible() ? "<C-O>:call coc#util#float_hide()<CR>" : "<ESC>"
-
 " Open terminal to the right
 map <leader><BS> :vsp term://fish<CR>
 
@@ -299,7 +311,7 @@ noremap <F1> <nop>
 
 " Sometimes you press q to exit from a buffer and when it doesn't work, you
 " try to do :q and bad things happen
-nnoremap q: :
+" nnoremap q: :
 
 " Config edit/reload
 noremap <silent> <F12> :sp ~/.config/nvim/init.vim<CR>
@@ -347,19 +359,18 @@ set number
 " ... and show relative line number on other lines
 set relativenumber
 
-" Enable mouse in normal and insert mode
-" It's only for the terminal, I swear
-set mouse=ni
+" Keep a 3 line margin between the cursor and the edge of the screen
+set scrolloff=3
 
-" Render tabs as 2 spaces, but still use tabs
+" Use two spaces as tabs
 set tabstop=2
 set shiftwidth=2
-set noexpandtab
+set expandtab
 
-" ... Except for Haskell. Use spaces in Haskell. Because Haskell
 augroup filetype_options
-	autocmd!
-	autocmd FileType haskell,fsharp set expandtab
+  autocmd!
+  autocmd FileType c,cpp set tabstop=2
+  autocmd FileType c,cpp set shiftwidth=2
 augroup END
 
 " Disable netrw history
