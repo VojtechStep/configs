@@ -33,7 +33,7 @@ refresh_batt() {
 
 # Updates the network ESSID block
 refresh_essid() {
-	essid=$(nmcli | rg -e "connected to (.*)$" -or "\$1")
+  essid=$(iwctl station wlan0 get-networks | rg '\x1b\[1;30m> \x1b\[0m(\s?.*?)\s+(psk|8021x|open)' -or '$1')
   if [ "$essid" = "" ]; then
     essid="No Internet"
   fi
