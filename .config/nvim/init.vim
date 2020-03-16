@@ -16,6 +16,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 " ==============================================================================
 "
 " Surrounding
+let g:sandwich_no_default_key_mappings = 1
+let g:operator_sandwich_no_default_key_mappings = 1
 Plug 'machakann/vim-sandwich'
 
 " Commenting
@@ -113,6 +115,7 @@ Plug 'Shougo/vinarise.vim'
 
 call plug#end()
 
+runtime macros/sandwich/keymap/surround.vim
 
 " Keybindings
 " ==============================================================================
