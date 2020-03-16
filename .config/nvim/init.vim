@@ -480,10 +480,16 @@ highlight CocHighlightText guibg=#373b61
 " Error and warning styles: undercurl with colored background
 let s:red_color = "#bb0000"
 let s:orange_color = "#ba5d00"
+let s:blue_color = "#005dbb"
+let s:ligh_blue_color = "#15aabf"
 exec "highlight CocErrorHighlight gui=undercurl,bold guisp=" . s:red_color
 exec "highlight CocErrorSign guifg=" . s:red_color
 exec "highlight CocWarningHighlight gui=undercurl guisp=" . s:orange_color
 exec "highlight CocWarningSign guifg=" . s:orange_color
+exec "highlight CocInfoHighlight gui=undercurl guisp=" . s:blue_color
+exec "highlight CocInfoSign guifg=" . s:blue_color
+exec "highlight CocHintHighlight gui=undercurl guisp=" . s:ligh_blue_color
+exec "highlight CocHintSign guifg=" . s:ligh_blue_color
 
 " Highlight trailing whitespace as error
 exec "highlight ExtraWhitespace guibg=" . s:red_color
