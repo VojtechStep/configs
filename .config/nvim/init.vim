@@ -1,12 +1,12 @@
 " Use sh if fish is the default shell
 if &shell =~# 'fish$'
-	set shell=sh
+  set shell=sh
 endif
 
 " Use ripgrep instead of grep
 if executable('rg')
-	set grepprg=rg\ --no-heading\ --vimgrep
-	set grepformat=%f:%l:%c:%m
+  set grepprg=rg\ --no-heading\ --vimgrep
+  set grepformat=%f:%l:%c:%m
 endif
 
 call plug#begin('~/.local/share/nvim/plugged')
@@ -21,26 +21,12 @@ Plug 'machakann/vim-sandwich'
 " Commenting
 Plug 'tpope/vim-commentary'
 
-"	Git changes
-" Plug 'airblade/vim-gitgutter'
 
-" Undo branch visualizer
-Plug 'mbbill/undotree'
-let g:undotree_SetFocusWhenToggle = 1
-
-"	Distractionless editing
-" Plug 'junegunn/goyo.vim'
-" Plug 'junegunn/limelight.vim'
-" let g:goyo_height = '90%'
-" let g:goyo_width = 100
-
-"	Count different casings as words
+" Count different casings as words
 Plug 'chaoren/vim-wordmotion'
 
-"	Japanese input
-" Plug 'tyru/eskk.vim'
 
-"	Complete paired characters: (,[,{,< etc
+" Complete paired characters: (,[,{,< etc
 Plug 'Raimondi/delimitMate'
 let delimitMate_expand_cr = 1
 
@@ -53,10 +39,10 @@ command! W :w suda://%
 " ==============================================================================
 "
 " Automatically set project folder based on files in directory
-Plug 'airblade/vim-rooter'
 let g:rooter_change_directory_for_non_project_files = 'current'
-let g:rooter_patterns = ['.git/', 'Cargo.toml', 'package.json', 'pom.xml']
+let g:rooter_patterns = ['Cargo.toml', 'package.json', 'pom.xml', 'stack.yaml', 'cabal.project', '.git/', '.vimproject']
 let g:rooter_silent_chdir = 1
+Plug 'airblade/vim-rooter'
 
 "	Fuzzy search in project files, open files
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -74,9 +60,6 @@ Plug 'sheerun/vim-polyglot'
 
 " GraphQL schema
 Plug 'jparise/vim-graphql', { 'for': 'graphqls' }
-
-" Flutter
-Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
 
 " XML Editing nicities
 Plug 'sukima/xmledit', { 'for': 'xml' }
@@ -301,12 +284,6 @@ set nowrap
 " Hide concealed text if the cursor is not on the same line (eg Markdown links)
 set conceallevel=2
 
-augroup goyo_limelight
-	autocmd!
-	autocmd User GoyoEnter Limelight
-	autocmd User GoyoLeave Limelight!
-augroup END
-
 " Use abbreviated status and silent search, don't show messages about search
 " wrapping around file
 set shortmess+=acs
@@ -361,8 +338,8 @@ augroup END
 
 " Write to path that is yet to exist
 function! s:WriteCreatingDirs()
-	execute ':silent !mkdir -p %:h'
-	write
+  execute ':silent !mkdir -p %:h'
+  write
 endfunction
 command! WW call <SID>WriteCreatingDirs()
 
