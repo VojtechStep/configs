@@ -5,6 +5,7 @@ end
 load-env ~/.envs.el
 
 set -U fish_user_paths
+abbr -a :q exit
 
 abbr -a v $VISUAL
 abbr -a e emacsclient -c
@@ -44,4 +45,4 @@ if test -f ~/.config/fish/autojump.fish
   source ~/.config/fish/autojump.fish
 end
 
-type nvm >/dev/null ^/dev/null; and nvm use 12
+type nvm >/dev/null ^/dev/null; and nvm use 10

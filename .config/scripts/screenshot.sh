@@ -24,6 +24,7 @@ take_screenshot_of_window(){
 	fi
 }
 
+notify.sh "Taking a screenshot" &
 case $1 in
 	root)
 		take_screenshot_of_window root
