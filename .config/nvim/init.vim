@@ -196,10 +196,6 @@ function! s:show_documentation()
 endfunction
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" Jump between splits
-nmap <silent> <C-l> :wincmd l<CR>
-nmap <silent> <C-h> :wincmd h<CR>
-
 " Use Ctrl+arrow keys for split resizing
 noremap <C-Right> <C-W>>
 noremap <C-Left> <C-W><
@@ -207,9 +203,10 @@ noremap <C-Down> <C-W>+
 noremap <C-Up> <C-W>-
 
 " Scroll if has popup, jump othewise
-nmap <silent> <expr> <C-k> coc#util#has_float() && coc#util#float_scrollable() ? ":call coc#util#float_scroll(0)<CR>" : ":wincmd k<CR>"
+nmap <silent> <expr> <C-k> coc#util#has_float() && coc#util#float_scrollable() ? ":call coc#util#float_scroll(0)<CR>" : ":wincmd W<CR>"
+
 imap <silent> <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-nmap <silent> <expr> <C-j> coc#util#has_float() && coc#util#float_scrollable() ? ":call coc#util#float_scroll(1)<CR>" : ":wincmd j<CR>"
+nmap <silent> <expr> <C-j> coc#util#has_float() && coc#util#float_scrollable() ? ":call coc#util#float_scroll(1)<CR>" : ":wincmd w<CR>"
 imap <silent> <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <silent> <expr> <C-l> pumvisible() ? "<C-y>" : "\<C-l>"
 
