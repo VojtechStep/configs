@@ -54,9 +54,12 @@ Plug 'junegunn/fzf.vim'
 "
 " LSP interface
 Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'jackguo380/vim-lsp-cxx-highlight', { 'for': ['c', 'cpp'] }
 
-" Language plugins bundle
-Plug 'sheerun/vim-polyglot'
+" Plug 'neovim/nvim-lsp'
+
+" Fish shell
+Plug 'dag/vim-fish', { 'for': 'fish' }
 
 " GraphQL schema
 Plug 'jparise/vim-graphql', { 'for': 'graphqls' }
@@ -64,6 +67,32 @@ Plug 'jparise/vim-graphql', { 'for': 'graphqls' }
 " XML Editing nicities
 Plug 'sukima/xmledit', { 'for': 'xml' }
 
+" Haskell
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
+
+" PlantUML
+let g:plantuml_set_makeprg = 0
+Plug 'aklt/plantuml-syntax'
+
+" TOML
+Plug 'cespare/vim-toml'
+
+" Nim
+Plug 'zah/nim.vim'
+
+" Crystal
+let g:crystal_auto_format = 1
+Plug 'rhysd/vim-crystal'
+
+" Zig
+Plug 'ziglang/zig.vim'
+
+" D
+Plug 'JesseKPhillips/d.vim'
+
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
 " Misc plugins
 " ==============================================================================
@@ -73,6 +102,14 @@ Plug 'chriskempson/base16-vim'
 
 " WakaTime time tracking
 Plug 'wakatime/vim-wakatime'
+
+let g:org_agenda_files = ["~/org/index.org"]
+let g:org_indent = 1
+Plug 'jceb/vim-orgmode'
+
+Plug 'inkarkat/vim-SyntaxRange'
+
+Plug 'Shougo/vinarise.vim'
 
 call plug#end()
 
@@ -157,33 +194,82 @@ noremap <leader>g :GFiles?<CR>
 " Search in help files
 noremap <leader>hh :Helptags<CR>
 
-" Show undo graph
-noremap <leader>v :UndotreeShow<CR>
-
-function! s:setup_undotree_bindings()
-	" Go to last change
-	nmap <buffer> U ggjj<CR>
-	" Close window
-	nmap <buffer> <ESC> q
-	" Bad things happen when you do :q
-	nmap <buffer> :q q
-endfunction
-
-augroup undotree_keybindings
-	autocmd!
-	autocmd FileType undotree :call <SID>setup_undotree_bindings()
-augroup END
+noremap <silent> <leader>sh :Helptags<CR>
 
 function! s:setup_netrw_bindings()
-	unmap <buffer> q
-	nmap <buffer> q :bw<CR>
-	nmap <buffer> <ESC> q
-	nmap <buffer> :q q
+  setl bufhidden=wipe
+  silent! unmap <buffer> q
+  map <silent> <buffer> q :bw<CR>
+endfunction
+augroup netrw_keybindings
+  autocmd!
+  autocmd FileType netrw :call <SID>setup_netrw_bindings()
+augroup END
+
+function! s:format_haskell()
+  let l:pos = getpos('.')
+  let l:tmp = tempname()
+  silent execute 'w !brittany > '.l:tmp
+  if v:shell_error == 0
+    silent execute 'w !diff -q '.l:tmp.' -'
+    if v:shell_error == 1
+        silent execute '%!cat '.l:tmp
+        call cursor(l:pos[1], l:pos[2])
+    endif
+  endif
+  call delete(l:tmp)
 endfunction
 
-augroup netrw_keybindings
-	autocmd!
-	autocmd FileType netrw :call <SID>setup_netrw_bindings()
+function! s:setup_haskell_bindings()
+  nnoremap <silent> <leader>d :InteroGoToDef<CR>
+  nnoremap <silent> <leader>h :InteroInfo<CR>
+  nnoremap <silent> <leader>r :InteroLoadCurrentFile<CR>
+  nnoremap <silent> <leader>o :InteroOpen<CR>
+  nnoremap <silent> <leader>h :InteroHide<CR>
+  nnoremap <silent> <A-F> :call <SID>format_haskell()<CR>
+endfunction
+
+augroup intero_keybingins
+  autocmd!
+  autocmd FileType haskell,hs :call <SID>setup_haskell_bindings()
+  autocmd BufWritePost *.hs InteroReload
+  autocmd BufWritePre *.hs :call <SID>format_haskell()
+augroup END
+
+function! s:setup_help_bindings()
+  silent! unmap <buffer> q
+  map <silent> <buffer> q :bw<CR>
+endfunction
+augroup help_bindings
+  autocmd!
+  autocmd FileType help,qf :call <SID>setup_help_bindings()
+augroup END
+
+function! s:setup_scheme()
+  let g:delimitMate_expand_cr = 0
+  let g:delimitMate_quotes = "\""
+endfunction
+augroup scheme_env
+  autocmd!
+  autocmd FileType scheme :call <SID>setup_scheme()
+augroup END
+
+function! s:setup_nasm()
+endfunction
+
+augroup nasm
+  autocmd!
+  autocmd BufRead,BufNewFile *.asm,*.nasm set ft=nasm
+  autocmd FileType nasm :call <SID>setup_nasm()
+augroup END
+
+function! s:setup_plantuml()
+  let &l:makeprg = 'sh -c "docker run -i --rm think/plantuml:latest < % > ' . expand('%:r') . '.svg"'
+endfunction
+
+augroup plantuml
+  autocmd!
+  autocmd FileType plantuml :call <SID>setup_plantuml()
 augroup END
 
 " Close others
@@ -321,19 +407,19 @@ set gdefault
 set viewoptions=cursor,curdir,folds
 " Save views on exit, load views on open
 augroup view_mgmt
-	autocmd!
-	autocmd BufWinLeave *.* mkview
-	autocmd BufWinEnter *.* silent! loadview
+  autocmd!
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent! loadview
 augroup END
 
 " Wait 300ms before highlighting words
 set updatetime=300
 augroup coc_autocmd
-	autocmd!
-	" Highlight instances of symbol under cursor after stoping on it
-	autocmd CursorHold * call CocActionAsync('highlight')
-	" Show function signature when jumping around placeholders
-	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  autocmd!
+  " Highlight instances of symbol under cursor after stoping on it
+  " autocmd CursorHold * call CocActionAsync('highlight')
+  " Show function signature when jumping around placeholders
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup END
 
 " Write to path that is yet to exist
@@ -346,6 +432,8 @@ command! WW call <SID>WriteCreatingDirs()
 " Edit relative to open file
 " TODO: Implement autocomplete
 command! -nargs=? E :e %:h/<args>
+
+command! PreviewMarkdown MarkdownPreview
 
 " Color config
 " ==============================================================================
