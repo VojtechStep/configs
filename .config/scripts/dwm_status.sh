@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 state="running"
 date=""
@@ -6,6 +6,8 @@ kbd=""
 bri=""
 batt=""
 essid=""
+vol=""
+vol_icon=""
 
 # All refresh_* functions only update internal state,
 # they do not redraw the status bar.
@@ -40,16 +42,26 @@ refresh_essid() {
 }
 
 refresh_vol() {
-	active=$(pacmd list-sinks | rg -w RUNNING -A7)
-	if [ "$active" = "" ]; then
-		active=$(pacmd list-sinks | rg -w volume -A4)
-	fi
-	muted=$(echo "$active" | rg -e "muted: (\w*)" -or "\$1")
-	if [ "$muted" = "yes" ]; then
-		vol="(mute)"
-	else
-		vol=$(echo "$active" | rg -e "volume: front-left.*?/\s*(\d{2,3}%)" -or "\$1")
-	fi
+  active=$(pacmd list-sinks 2>/dev/null | rg -w RUNNING -A7)
+  if [ "$active" = "" ]; then
+    vol="婢"
+    # active=$(pacmd list-sinks | rg -w volume -A4)
+  else
+    muted=$(echo "$active" | rg -e "muted: (\w*)" -or "\$1")
+    if [ "$muted" = "yes" ]; then
+      vol="婢"
+    else
+      vol=$(echo "$active" | rg -e "volume: front-left.*?/\s*(\d{1,3})%" -or "\$1")
+      if [ "$vol" -gt 80 ]; then
+        vol_icon="墳"
+      elif [ "$vol" -gt 40 ]; then
+        vol_icon="奔"
+      else
+        vol_icon="奄"
+      fi
+      vol="$vol_icon $vol%"
+    fi
+  fi
 }
 
 # Updates all the blocks, then redraws
@@ -71,8 +83,8 @@ refresh_periodic(){
 
 # Performs the status bar redraw
 redraw(){
-		xsetroot -name " $kbd | ☀️ $bri | 🔉 $vol |  $essid | $batt | $date "
   if [ "$state" = "running" ]; then
+    xsetroot -name " $kbd |  $bri | $vol |  $essid |  $batt | $date "
   fi
 }
 
