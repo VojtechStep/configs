@@ -5,7 +5,7 @@ unclutter &
 
 xrandr --dpi 315
 ~/.config/scripts/monitor_setup.sh &
-~/.config/scripts/display_adj.sh &
+~/.config/scripts/display_adj.sh = &
 ~/.config/scripts/touchpad_setup.sh &
 ~/.config/scripts/dwm_status.sh &
 setxkbmap -layout us,cz
