@@ -13,30 +13,30 @@ essid=""
 
 # Updates the date block
 refresh_date(){
-	date=$(date +%H:%m)
+  date=$(date +%H:%M)
 }
 
 # Updates the keyboard layout block
 refresh_kbd(){
-	kbd=$(xkblayout-state print "%s")
+  kbd=$(xkblayout-state print "%e")
 }
 
 # Updates the brightness block
 refresh_bright(){
-	bri=$(echo "$(cat ~/.brightness)*100/1" | bc)
+  bri=$(echo "$(cat ~/.brightness)*100/1" | bc)
 }
 
 # Updates the battery block
 refresh_batt() {
-	batt=$(acpi -b | cut -d" " -f4 | tr -d ",")
+  batt=$(acpi -b | cut -d" " -f4 | tr -d ",")
 }
 
 # Updates the network ESSID block
 refresh_essid() {
 	essid=$(nmcli | rg -e "connected to (.*)$" -or "\$1")
-	if [ "$essid" = "" ]; then
-		essid="No Internet"
-	fi
+  if [ "$essid" = "" ]; then
+    essid="No Internet"
+  fi
 }
 
 refresh_vol() {
@@ -54,40 +54,39 @@ refresh_vol() {
 
 # Updates all the blocks, then redraws
 refresh_all(){
-	refresh_kbd
-	refresh_date
-	refresh_bright
-	refresh_batt
-	refresh_essid
-	refresh_vol
-	redraw
+  refresh_kbd
+  refresh_date
+  refresh_bright
+  refresh_batt
+  refresh_essid
+  refresh_vol
 }
 
 # Called every major tick (by default every 5s)
 refresh_periodic(){
-	refresh_date
-	refresh_batt
-	redraw
+  refresh_date
+  refresh_batt
+  redraw
 }
 
 # Performs the status bar redraw
 redraw(){
-	if [ "$state" = "running" ]; then
 		xsetroot -name " $kbd | ☀️ $bri | 🔉 $vol |  $essid | $batt | $date "
-	fi
+  if [ "$state" = "running" ]; then
+  fi
 }
 
 # RMIN+1 -> refresh all
-trap "refresh_all; redraw" RTMIN+1
+trap "refresh_all" RTMIN+1
 
 # RTMIN+2 -> refresh keyboard
-trap "refresh_kbd; redraw" RTMIN+2
+trap "refresh_kbd" RTMIN+2
 
 # RTMIN+3 -> refresh brightness
-trap "refresh_bright; redraw" RTMIN+3
+trap "refresh_bright" RTMIN+3
 
 # RTMIN+4 -> refresh volume
-trap "refresh_vol; redraw" RTMIN+4
+trap "refresh_vol" RTMIN+4
 
 trap "state=paused" RTMIN+5
 
@@ -95,11 +94,12 @@ trap "state=running" RTMIN+6
 
 # Start by refreshing all
 refresh_all
+redraw
 
 while :
 do
-	# Sleep for 5 seconds while also receiving signals
-	sleep 1m &
-	wait $!
-	refresh_periodic
+  # Sleep for a minute while also receiving signals
+  sleep 1m &
+  wait $!
+  refresh_periodic
 done
