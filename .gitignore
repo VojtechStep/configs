@@ -1,9 +1,3 @@
-.config/dconf
 .config/fish/fishd.AdalbertDEV
-.config/**/node_modules
-.config/pulse
-.config/nvim/spell
-.config/coc/*
-!.config/coc/extensions/package.json
-!.config/coc/extensions/yarn.lock
 .config/fish/fish_variables
+.config/nvim/spell
