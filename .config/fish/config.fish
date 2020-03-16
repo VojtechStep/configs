@@ -1,18 +1,8 @@
-set -xg GDK_SCALE 2
-set -xg PATH $HOME/.fzf/bin $PATH
-set -xg PATH $HOME/.yarn/bin $PATH
-set -xg PATH $HOME/.cargo/bin $PATH
-set -xg PATH $HOME/.local/bin $PATH
-set -xg PATH $HOME/.pub-cache/bin $PATH
-set -xg PATH $HOME/.dotnet/tools $PATH
-set -xg PATH /opt/android-sdk/tools/bin $PATH
-set -xg PATH /opt/android-sdk/platform-tools $PATH
-set -xg MCU_IDE_DIR /usr/local/mcuxpresso-ide
-set -xg ANDROID_HOME /opt/android-sdk
-set -xg DOTNET_ROOT /opt/dotnet
-set -xg VISUAL nvim
-set -xg EDITOR nvim
-set -xg BROWSER firefox
+function load-env -a script
+  source $script $script
+end
+
+load-env ~/.envs.el
 
 set -U fish_user_paths
 
