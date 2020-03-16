@@ -139,6 +139,10 @@ runtime macros/sandwich/keymap/surround.vim
 "
 " Set space as Leader key
 let mapleader = "\<Space>"
+nmap <space> <nop>
+
+" Used emacs for a bit, now I can't live without this
+cmap <C-g> <C-c>
 
 " Insert mode autocomplete
 inoremap <silent> <expr> <C-Space> coc#refresh()
@@ -329,6 +333,8 @@ noremap <F1> <nop>
 " Config edit/reload
 noremap <silent> <F12> :sp ~/.config/nvim/init.vim<CR>
 noremap <silent> <F24> :so ~/.config/nvim/init.vim<CR>
+noremap <silent> <leader>ev :sp ~/.config/nvim/init.vim<CR>
+noremap <silent> <leader>ef :sp ~/.config/fish/config.fish<CR>
 
 " H/L goto start/end of line
 map H ^
