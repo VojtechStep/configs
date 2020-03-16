@@ -1,47 +1,54 @@
 {
-	"suggest.echodocSupport": false,
-	"suggest.enablePreview": true,
-	"diagnostic.messageTarget": "float",
-	"signature.target": "float",
-	"coc.preferences.hoverTarget": "float",
-	"suggest.acceptSuggestionOnCommitCharacter": true,
-	"codeLens.enable": true,
-	"languageserver": {
-		"hie": {
-			"command": "hie-wrapper",
-			"filetypes": [
-				"haskell"
-			]
-		},
-		"ccls": {
-			"command": "ccls",
-			"filetypes": [
-				"c",
-				"cpp"
-			],
-			"initializationOptions": {
-				"cache": {
-					"directory": "/tmp/ccls"
-				}
-			}
-		},
-		"dart_language_server": {
-			"command": "dart_language_server",
-			"filetypes": [
-				"dart"
-			]
-		}
-	},
-	"rust.clippy_preference": "on",
-	"coc.preferences.formatOnType": true,
-	"coc.preferences.formatOnSaveFiletypes": [
-		"rust",
-		"java",
-		"haskell",
-		"javascript",
-		"javascript.jsx"
-	],
-	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
-	"rust.all_targets": false,
-	"git.addGlameToVirtualText": true
+  "suggest.echodocSupport": false,
+  "suggest.enablePreview": true,
+  "diagnostic.messageTarget": "float",
+  "signature.target": "float",
+  "coc.preferences.hoverTarget": "float",
+  "coc.preferences.colorSupport": true,
+  "suggest.acceptSuggestionOnCommitCharacter": true,
+  "codeLens.enable": false,
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp"],
+      "rootPatterns": [".vimproject"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        },
+        "highlight": { "lsRanges": true }
+      }
+    },
+    "clangd": {
+      "command": "clangd",
+      "args": ["--background-index"],
+      "filetypes": ["c", "cpp"],
+      "enable": false
+    },
+    "metals": {
+      "command": "metals-vim",
+      "rootPatterns": ["build.sbt"],
+      "filetypes": ["scala", "sbt"]
+    },
+    "scry": {
+      "command": "scry",
+      "filetypes": ["crystal"]
+    },
+    "dls": {
+      "command": "dls",
+      "filetypes": ["d"]
+    }
+  },
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnSaveFiletypes": ["java", "haskell", "c", "cpp", "rust", "d"],
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "rust-analyzer.raLspServerPath": "~/.cargo/bin/ra_lsp_server",
+  "git.addGBlameToVirtualText": true,
+  "git.enableGutters": true,
+  "java.completion.guessMethodArguments": true,
+  "java.errors.incompleteClasspath.severity": "ignore",
+  "java.format.settings.url": "/home/adalbert/.config/java-formatter.xml",
+  "list.insertMappings": {
+    "<C-g>": "do:exit"
+  }
 }
