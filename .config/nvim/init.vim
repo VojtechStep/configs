@@ -145,36 +145,53 @@ inoremap <silent> <expr> <C-Space> coc#refresh()
 inoremap <silent> <C-d> <C-O>:call CocActionAsync('showSignatureHelp')<CR>
 
 " LSP keybindings
+"
 " Symbol information
 nmap <silent> gh :call CocActionAsync('doHover')<CR>
+
+nmap <silent> <leader>h :call CocActionAsync('highlight')<CR>
+
 " Error/Warning information
 nmap <silent> <leader>e <Plug>(coc-diagnostic-info)
+
 " Jump to definition
 nmap <silent> <leader>d <Plug>(coc-definition)
+
+" Jump to implementation
+nmap <silent> <leader>i <Plug>(coc-implementation)
+
 " Jump to references
 nmap <silent> <leader>r <Plug>(coc-references)
+
 " Rename symbol
 nmap <silent> <F2> <Plug>(coc-rename)
+
 " Format document
 nmap <silent> <A-F> <Plug>(coc-format)
+
 " Format selection
 vmap <silent> <A-F> <Plug>(coc-format-selected)
-" Show code actions
-nmap <silent> <Tab> :CocAction<CR>
+
 " Show codelens actions
 nmap <silent> <leader>c <Plug>(coc-codelens-action)
+
 " Do quickfix
-nmap <silent> <leader>q <Plug>(coc-fix-current)
+nmap <silent> <leader>q :CocAction<CR>
+
 " Jump to next warning/error
 nmap <silent> <F8> <Plug>(coc-diagnostic-next)
+
 " Jump to previous warning/error
 nmap <silent> <F20> <Plug>(coc-diagnostic-prev)
+
+nmap <silent> <leader>sd :CocList diagnostics<CR>
 
 function! s:show_documentation()
   if &filetype == 'vim' || &filetype == 'help'
     execute 'h '.expand('<cword>')
   else
     call CocActionAsync('doHover')
+    " call LspHover
   endif
 endfunction
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -197,23 +214,21 @@ imap <silent> <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <silent> <expr> <C-l> pumvisible() ? "<C-y>" : "\<C-l>"
 
 " Switch to last buffer
-nnoremap <leader><leader> <C-^>
+nnoremap <silent> <leader><leader> <C-^>
 " Split right
-nnoremap <leader>l :vsp<CR>
+nnoremap <silent> <leader>l :vsp<CR>
 " Split down
-nnoremap <leader>j :sp<CR>
+nnoremap <silent> <leader>j :sp<CR>
 
 " Search in files, respect .gitignore
 noremap <C-F> :Rg<space>
 " Search in file names, respect .gitignore
-noremap <expr> <C-P> len(system('git rev-parse')) ? ":Files\<CR>" : ":GFiles --exclude-standard --others --cached\<CR>"
+noremap <silent> <expr> <leader>f len(system('git rev-parse')) ? ":Files\<CR>" : ":GFiles --exclude-standard --others --cached\<CR>"
 " Search in open file names
-noremap <leader>b :Buffers<CR>
+noremap <silent> <leader>g :Buffers<CR>
 " Search in changed files
-noremap <leader>g :GFiles?<CR>
+" noremap <silent> <leader>g :GFiles?<CR>
 " Search in help files
-noremap <leader>hh :Helptags<CR>
-
 noremap <silent> <leader>sh :Helptags<CR>
 
 function! s:setup_netrw_bindings()
@@ -293,18 +308,19 @@ augroup plantuml
 augroup END
 
 " Close others
-nnoremap <leader>ca :%bd<bar>e#<bar>bd#<CR>
+nnoremap <silent> <leader>ca :%bd<bar>e#<bar>bd#<CR>
 " Close buffer
-nnoremap <leader>cc :bw<CR>
+nnoremap <silent> <leader>cc :bw<CR>
 " Hide popup or stop highlight
 nmap <silent> <expr> <ESC> coc#util#has_float() ? ":call coc#util#float_hide()<CR>" : ":noh<CR>"
 
 " Open terminal to the right
-map <leader><BS> :vsp term://fish<CR>
+map <silent> <leader><BS> :vsp term://fish<CR>
 
 " Jump between splits from terminal
-tmap <C-H> <C-\><C-N>:wincmd h<CR>
-tmap <C-L> <C-\><C-N>:wincmd l<CR>
+tmap <silent> <C-H> <C-\><C-N>:wincmd h<CR>
+tmap <silent> <C-L> <C-\><C-N>:wincmd l<CR>
+tmap <silent> <C-f> <C-\><C-N>
 
 " Don't show help with <F1>, i know my setup
 noremap <F1> <nop>
