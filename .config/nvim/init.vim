@@ -336,6 +336,8 @@ noremap <silent> <F24> :so ~/.config/nvim/init.vim<CR>
 " H/L goto start/end of line
 map H ^
 map L $
+imap <C-h> <C-o>H
+imap <C-l> <C-o>L
 
 noremap ; :
 
