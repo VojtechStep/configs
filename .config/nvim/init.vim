@@ -393,6 +393,10 @@ let g:netrw_dirhistmax = 0
 " Set default netrw view to Tree
 let g:netrw_liststyle = 3
 
+" Open previews to the right
+let g:netrw_preview = 1
+let g:netrw_alto = 0
+
 " Don't wrap text
 set nowrap
 
