@@ -44,8 +44,8 @@ let g:rooter_patterns = ['Cargo.toml', 'package.json', 'pom.xml', 'stack.yaml', 
 let g:rooter_silent_chdir = 1
 Plug 'airblade/vim-rooter'
 
-"	Fuzzy search in project files, open files
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+" Fuzzy search in project files, open files
+Plug '/usr/share/vim/vimfiles' " Managed via pacman
 Plug 'junegunn/fzf.vim'
 
 
