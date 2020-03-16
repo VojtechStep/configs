@@ -9,6 +9,9 @@
 "termite"
 	Mod4 + Return
 
+"~/.config/scripts/here.sh -I{} emacs --chdir '{}'"
+  Mod4 + e
+
 "~/.config/scripts/display_adj.sh + && pkill -RTMIN+3 -f 'sh .*dwm_status'"
 	XF86MonBrightnessUp
 
