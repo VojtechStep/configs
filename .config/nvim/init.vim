@@ -346,14 +346,11 @@ noremap <leader>y :w !xclip -select clipboard -i<CR><CR>
 vnoremap <leader>y "+y
 
 " Toggle fold
-nnoremap <leader>f za
+" nnoremap <silent> <leader>f za
 " Unfold all
-nnoremap <leader>u zR
+" nnoremap <silent> <leader>u zR
 " Fold all
-nnoremap <leader>n zM
-
-" Toggle zen mode
-nnoremap <leader>z :Goyo<CR>
+" nnoremap <silent> <leader>n zM
 
 
 " Editor config
@@ -366,7 +363,8 @@ syntax on
 " Copy indent from previous line
 set autoindent
 " Load folding rules from syntax files
-set foldmethod=syntax
+" set foldmethod=syntax
+" set foldminlines=10
 
 " Show cursor position in lower right corner
 set ruler
