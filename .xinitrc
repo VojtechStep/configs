@@ -12,7 +12,7 @@ setxkbmap -option caps:ctrl_modifier -layout us,us,cz -variant ,colemak,qwerty
 ~/.fehbg &
 
 termite &
-firefox &
+chromium &
 xbindkeys
 
 exec dwm

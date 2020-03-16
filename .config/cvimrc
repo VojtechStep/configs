@@ -1,0 +1,34 @@
+let configpath = "/home/adalbert/.config/cvimrc"
+set localconfig
+
+let barposition = "bottom"
+let mapleader = "<Space>"
+let defaultengine = "duckduckgo"
+let completionengines = []
+let hintcharacters = "hjklasdfgyuiopqwertnmzxcvb"
+
+set noautofocus
+set completeopen
+
+unmap w
+unmap a
+unmap s
+unmap d
+unmap R
+
+unmap J
+unmap K
+map J nextTab
+map K previousTab
+
+unmap x
+unmap X
+map d closeTab
+map u lastClosedTab
+
+map R reloadTabUncached
+
+unmap O
+unmap t
+unmap T
+map O :tabnew<Space>
