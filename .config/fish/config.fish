@@ -39,7 +39,7 @@ abbr vv nvim ~/.config/nvim/init.vim
 
 if status --is-login
   if test -z "$DISPLAY" -a $XDG_VTNR = 1
-    exec startx
+    exec startx -- -ardelay 300 -arinterval 30
   end
 end
 
