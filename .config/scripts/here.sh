@@ -14,11 +14,23 @@ if [ -z "$*" ] || [ "$*" = "-h" ] || [ "$*" = "--help" ]; then
     exit 1
 fi
 
+run() {
+    if [ x$dir = x ]; then
+        dir=$HOME
+    fi
+    echo $dir | xargs $@
+}
+
 # Get active window and corresponding process
 parent=$(xprop -root _NET_ACTIVE_WINDOW \
                | rg -e '# (\w+)' -or '$1' \
-               | xargs xprop _NET_WM_PID -id \
+               | xargs xprop _NET_WM_PID -id 2>/dev/null \
                | rg -e ' = (\d+)' -or '$1')
+
+if [ x$parent = x ]; then
+    run $@
+    exit
+fi
 
 # Get children processes
 #
@@ -44,4 +56,4 @@ else
     dir=$(readlink -e /proc/$children/cwd)
 fi
 
-echo $dir | xargs $@
+run $@
