@@ -9,7 +9,7 @@ xrandr --dpi 315
 ~/.config/scripts/dwm_status.sh &
 setxkbmap -option caps:ctrl_modifier -layout us,us,cz -variant ,colemak,qwerty
 
-~/.fehbg &
+~/.config/fehbg &
 
 termite &
 chromium &

@@ -25,7 +25,7 @@ refresh_kbd(){
 
 # Updates the brightness block
 refresh_bright(){
-  bri=$(echo "$(cat ~/.brightness)*100/1" | bc)
+  bri=$(echo "$(cat ~/.config/brightness)*100/1" | bc)
 }
 
 # Updates the battery block

@@ -1,7 +1,7 @@
 #! /usr/bin/sh
 
 INCREMENT=0.05
-CONFIG=$HOME/.brightness
+CONFIG=$HOME/.config/brightness
 
 if [ -f "$CONFIG" ]; then
 	LEVEL=$(cat $CONFIG)
