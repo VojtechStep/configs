@@ -13,6 +13,8 @@ abbr -a em emacs
 abbr -a rem systemctl --user restart emacs
 abbr -a eaf 'emacsclient --eval "(projectile-add-known-project \""(pwd)"\")"'
 
+abbr -a qmk 'docker run -it --rm -v (pwd)":/qmk_firmware" qmkfm/base_container make -C /qmk_firmware/ ergodox_ez:vojtechstep'
+
 
 abbr -a ls exa -l
 abbr -a la exa -la
