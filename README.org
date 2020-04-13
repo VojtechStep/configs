@@ -1,0 +1,28 @@
+This repository contains most of the configuration of my setup that I
+care about. No guarantee is made about backwards compatibility or
+portability.
+
+This config is currently used on my Arch machine.
+
+* Usage
+
+* TODO
+- [ ] Add a usage section
+- [ ] Cleanup config/
+- [-] Emacs
+  - [X] Migrate to straight.el
+  - [-] Track todos in org-mode
+    - [X] Add a todo list to README.org
+    - [ ] Figure out how to intergrate it into org-agenda
+  - [ ] Better comments
+  - [ ] Setup pdf keybindings
+  - [ ] Setup some LSP client
+  - [ ] Setup emacs server
+  - [ ] Setup file skeletons
+  - [ ] Extract some local functionality to autoloaded packages
+  - [ ] Write activitywatcher dashboard
+  - [ ] Ligatures
+  - [ ] Review packages:
+    - [ ] git-link
+    - [ ] persp
+    - [ ] helpful
