@@ -45,6 +45,8 @@ in a 'condition-case. That in turn calls this advice and repeat infinitely."
 
 (use-package evil-magit
   :straight t
+  :custom
+  (evil-magit-want-horizontal-movement t)
   :hook
   (magit-mode . (lambda ()
                   (require 'evil-magit))))
