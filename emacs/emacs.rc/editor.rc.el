@@ -78,6 +78,7 @@
 (use-package color-theme-sanityinc-tomorrow
   :straight t
   :if (not vs/--loaded-theme)
+  :demand
   :config
   (load-theme 'sanityinc-tomorrow-night t))
 
@@ -89,6 +90,9 @@
 
 (use-package helpful
   :disabled
+  :straight t)
+
+(use-package esup
   :straight t)
 
 (provide 'editor.rc)

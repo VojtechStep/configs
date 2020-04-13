@@ -75,6 +75,7 @@
 
 (setq vc-handled-backends nil)
 (setq vc-follow-symlinks t)
+
 ;; Prevent cluttering of the emacs config directory
 (defconst vs/cache-dir "~/.cache/emacs"
   "Where to store semi-persistent files.")
@@ -99,7 +100,6 @@
 (setq package-enable-at-startup nil)
 
 ;; Predefine use-package config
-(defvar use-package-verbose t)
 (defvar use-package-compute-statistics t)
 (defvar use-package-always-defer t)
 
