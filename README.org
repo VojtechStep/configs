@@ -6,7 +6,7 @@ This config is currently used on my Arch machine.
 
 * Usage
 
-* TODO
+* TODO To-do list
 - [ ] Add a usage section
 - [ ] Cleanup config/
 - [-] Emacs
