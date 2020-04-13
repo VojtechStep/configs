@@ -66,6 +66,8 @@ in a 'condition-case. That in turn calls this advice and repeat infinitely."
 (use-package evil-org
   :straight t
   :after (evil org)
+  :hook
+  (org-mode . evil-org-mode)
   :config
   (evil-org-set-key-theme))
 
