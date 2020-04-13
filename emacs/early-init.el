@@ -73,6 +73,8 @@
 (setq user-mail-address "vojtechstepancik@outlook.com")
 (setq user-full-name "Vojtech Stepancik")
 
+(setq vc-handled-backends nil)
+(setq vc-follow-symlinks t)
 ;; Prevent cluttering of the emacs config directory
 (defconst vs/cache-dir "~/.cache/emacs"
   "Where to store semi-persistent files.")

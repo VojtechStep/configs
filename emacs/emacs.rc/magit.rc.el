@@ -26,10 +26,6 @@
   :config
   (transient-bind-q-to-quit))
 
-(use-package vc-hooks
-  :custom
-  (vc-handled-backends nil))
-
 (provide 'magit.rc)
 
 ;;; magit.rc.el ends here
