@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 if [ "$(pgrep -fx transmission-daemon)" = "" ]; then
 	transmission-daemon

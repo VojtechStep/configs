@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 scr_dir="$SCREENSHOT_DIR"
 

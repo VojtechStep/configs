@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 
 ID=$(xinput list | grep Touchpad | cut -f2 | cut -d"=" -f2)
 

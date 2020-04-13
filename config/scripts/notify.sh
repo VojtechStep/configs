@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 text=$1
 duration=$2

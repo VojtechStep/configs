@@ -1,4 +1,4 @@
-.config/fish/fishd.AdalbertDEV
-.config/fish/fish_variables
-.config/fish/completions/rustup.fish
-.config/nvim/spell
+config/fish/fishd.AdalbertDEV
+config/fish/fish_variables
+config/fish/completions/rustup.fish
+config/nvim/spell

@@ -1,3 +1,3 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 echo $(fzf <$1) > $1

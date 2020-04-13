@@ -6,7 +6,7 @@
 # The release modifier is not a standard X modifier, but you can
 # use it if you want to catch release events instead of press events
 
-"termite"
+"~/.config/scripts/here.sh -I{} alacritty --working-directory '{}'"
 	Mod4 + Return
 
 "~/.config/scripts/here.sh -I{} emacs --chdir '{}'"

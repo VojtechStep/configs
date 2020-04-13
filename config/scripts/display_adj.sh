@@ -1,4 +1,4 @@
-#! /usr/bin/sh
+#! /bin/sh
 
 INCREMENT=0.05
 CONFIG=$HOME/.config/brightness

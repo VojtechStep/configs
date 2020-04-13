@@ -33,6 +33,7 @@ abbr gif git fetch
 abbr gip git pull
 abbr gipl git plog
 abbr gipo git plog origin/master
+abbr gdo git diff HEAD origin/master
 
 abbr vf nvim ~/.config/fish/config.fish
 abbr vv nvim ~/.config/nvim/init.vim
