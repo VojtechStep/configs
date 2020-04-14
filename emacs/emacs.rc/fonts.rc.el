@@ -50,6 +50,35 @@
   (dolist (emojis ranges)
     (set-fontset-font t emojis "Noto Color Emoji")))
 
+;; Ranges provided by https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points
+(let ((ranges '(;; Seti-UI + Custom
+                (#xe5fa . #xe62b)
+                ;; Devicons
+                (#xe700 . #xe7c5)
+                ;; Font Awesome
+                (#xf000 . #xf2e0)
+                ;; Font Awesome Extension
+                (#xe200 . #xe2a9)
+                ;; Material Design Icons
+                (#xf500 . #xfd46)
+                ;; Weather
+                (#xe300 . #xe3eb)
+                ;; Octicons
+                (#xf400 . #xf4a8)
+                #x2665 #x26a1 #xf27c
+                ;; Powerline Extra Symbols
+                (#xe0b4 . #xe0c8)
+                (#xe0cc . #xe0d2)
+                #xe0a3 #xe0ca #xe0d4
+                ;; IEC Power Sybols
+                (#x23fb . #x23fe) #x2b58
+                ;; Font Logos
+                (#xf300 . #xf313)
+                ;; Pomicons
+                (#xe000 . #xe00d))))
+  (dolist (syms ranges)
+    (set-fontset-font t syms "Symbols Nerd Font")))
+
 (provide 'fonts.rc)
 
 ;;; fonts.rc.el ends here
