@@ -12,7 +12,9 @@
   :custom-face
   (markdown-header-face-1 ((t (:height 1.3 :inherit markdown-header-face))))
   :hook
-  (markdown-mode . prose-mode))
+  (markdown-mode . (lambda ()
+                     (require 'prose.rc)
+                     (prose-mode))))
 
 (provide 'markdown.rc)
 

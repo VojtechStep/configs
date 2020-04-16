@@ -23,6 +23,7 @@ in a 'condition-case. That in turn calls this advice and repeat infinitely."
   :demand
   :custom
   (evil-want-keybinding nil)
+  (evil-want-Y-yank-to-eol t)
   (evil-lookup-func #'vs/help-dwim)
   (evil-symbol-word-search t)
   (evil-shift-width tab-width)

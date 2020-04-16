@@ -43,21 +43,21 @@
     "M" #'evil-snipe-S
     "C-;" #'comment-dwim)
 
-  (general-def 'insert 'override
-    "C-;" #'comment-dwim
-    "C-<ret>" #'comment-indent-new-line)
-  
   (general-unbind 'normal
     "m"
     "M")
 
+  (general-def 'insert 'override
+    "C-;" #'comment-dwim
+    "C-<ret>" #'comment-indent-new-line
+    "C-v" #'yank
+    "C-S-v" #'quoted-insert
+    "C-SPC" #'company-complete)
+  
   (general-unbind 'motion
     "C-f"
     "SPC"
     "RET")
-
-  (general-def 'insert 'override
-    "C-SPC" #'company-complete)
 
   (general-def 'visual 'override
     "<tab>" #'align)

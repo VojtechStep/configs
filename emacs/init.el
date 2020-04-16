@@ -29,6 +29,7 @@
 ;; Make CMake-ccls more robust
 ;; Either ignore existing debug folders or generate them iteratively
 (require 'c_cpp.rc)
+(require 'csv.rc)
 ;; Proper REPL setup
 (require 'haskell.rc)
 ;; Revisit
@@ -45,6 +46,7 @@
 (require 'pdf.rc)
 ;; Revisit later
 (require 'rust.rc)
+(require 'shell.rc)
 ;; Read on what you can do
 (require 'sx.rc)
 ;; Setup properly
