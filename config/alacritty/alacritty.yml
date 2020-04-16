@@ -402,6 +402,11 @@ alt_send_esc: true
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # at once.
+
+key_bindings:
+  - { key: A,                         mode: Vi,   action: ToggleViMode }
+  - { key: Escape,                    mode: Vi,   action: ToggleViMode }
+
 #key_bindings:
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }
