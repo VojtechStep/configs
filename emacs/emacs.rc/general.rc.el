@@ -103,6 +103,9 @@
   (general-def 'normal 'org-mode-map
     "TAB" #'org-cycle)
 
+  (general-def 'org-mode-map
+    [remap evil-delete-backward-char] #'org-delete-backward-char)
+  
   ;; Helm
   (general-def 'helm-map
     "C-j" #'helm-next-line

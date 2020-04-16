@@ -25,7 +25,9 @@
 ;;; Code:
 
 (use-package org
-  :straight t
+  :straight (org :host github
+                 :repo "emacs-straight/org-mode"
+                 :local-repo "org")
   :hook
   (org-mode . org-indent-mode)
   :custom
