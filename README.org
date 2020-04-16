@@ -21,8 +21,12 @@ This config is currently used on my Arch machine.
   - [ ] Setup emacs server
   - [ ] Setup file skeletons
   - [ ] Extract some local functionality to autoloaded packages
-  - [ ] Write activitywatcher dashboard
+  - [ ] Package ideas
+    - [ ] Activity watch dashboard
+    - [ ] Straight.el dashboard
+  - [ ] Fix fringe on HiDPI screens
   - [ ] Review packages:
     - [ ] git-link
     - [ ] persp
     - [ ] helpful
+
