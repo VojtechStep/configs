@@ -12,15 +12,15 @@
 
 (use-package forge
   :straight t
+  :hook
+  (magit-status-mode . (lambda ()
+                         (require 'forge)))
   :config
-  (defmacro forge-derive (newhost host)
-            `(cl-pushnew (cons ,newhost
-                               (cdr (seq-find (lambda (it)
-                                                (string= (car it)
-                                                         ,host))
-                                              forge-alist)))
-                         forge-alist))
-  (forge-derive "gh" "github.com"))
+  (cl-pushnew '("gitlab.fel.cvut.cz"
+                "gitlab.fel.cvut.cz/api/v4"
+                "gitlab.fel.cvut.cz"
+                forge-gitlab-repository)
+              forge-alist))
 
 (use-package transient
   :config

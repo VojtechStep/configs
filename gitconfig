@@ -1,5 +1,3 @@
-[credential]
-	helper = /usr/bin/pass-git-helper
 [user]
 	email = vojtechstepancik@outlook.com
 	name = VojtechStep
@@ -9,3 +7,5 @@
 	autocrlf = input
 [github]
 	user = VojtechStep
+[gitlab "gitlab.fel.cvut.cz/api/v4"]
+	user = stepavo2

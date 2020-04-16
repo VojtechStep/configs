@@ -11,7 +11,7 @@ abbr -a v $VISUAL
 abbr -a e emacsclient -c
 abbr -a em emacs
 abbr -a rem systemctl --user restart emacs
-abbr -a eaf 'emacsclient --eval "(projectile-add-known-project \""(pwd)"\")"'
+abbr -a eap 'emacsclient --eval "(projectile-add-known-project \""(pwd)"\")"'
 
 abbr -a qmk 'docker run -it --rm -v (pwd)":/qmk_firmware" qmkfm/base_container make -C /qmk_firmware/ ergodox_ez:vojtechstep'
 
@@ -34,6 +34,8 @@ abbr gip git pull
 abbr gipl git plog
 abbr gipo git plog origin/master
 abbr gdo git diff HEAD origin/master
+abbr gh git clone git@github.com:
+abbr gl git clone git@gitlab.fel.cvut.cz:
 
 abbr vf nvim ~/.config/fish/config.fish
 abbr vv nvim ~/.config/nvim/init.vim
