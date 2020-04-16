@@ -82,7 +82,7 @@
 (cl-flet ((cache (lambda (name)
                    (expand-file-name name vs/cache-dir))))
   (with-no-warnings
-    (setq auto-save-file-list-filename (cache "auto-save-list/saves-"))
+    (setq auto-save-list-file-prefix (cache "auto-save-list/saves-"))
     (setq backup-directory-alist `(("." . ,(cache "saves/"))))
     (setq bookmark-default-file (cache "bookmarks"))
     (setq custom-file (cache "custom.el"))
