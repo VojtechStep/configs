@@ -14,6 +14,7 @@ This config is currently used on my Arch machine.
   - [-] Track todos in org-mode
     - [X] Add a todo list to README.org
     - [ ] Figure out how to intergrate it into org-agenda
+  - [X] Ligatures
   - [ ] Better comments
   - [ ] Setup pdf keybindings
   - [ ] Setup some LSP client
@@ -21,7 +22,6 @@ This config is currently used on my Arch machine.
   - [ ] Setup file skeletons
   - [ ] Extract some local functionality to autoloaded packages
   - [ ] Write activitywatcher dashboard
-  - [ ] Ligatures
   - [ ] Review packages:
     - [ ] git-link
     - [ ] persp

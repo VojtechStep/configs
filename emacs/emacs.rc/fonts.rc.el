@@ -5,42 +5,97 @@
 ;; This file tries to accomplish the following things:
 ;; 1) Set default font
 ;; 2) Add programming ligatures
-;; 3) Set fallback font for emoji ranges
+;; 3) Set fallback fonts for emoji and symbols
+;;
+;; Default font is JetBrains Mono, with color emojis from Noto Color emojis
+;; and symbols from Symbols Nerd Font
 
 ;;; Code:
 
-;; Default font is Cascadia Code with nerd fonts
+;; Default font is JetBrains Mono
 (set-face-attribute 'default nil
-		                ;; :family "Cascadia Code"
-                    :family "JetBrains Mono Regular Nerd Complete"
+                    :family "JetBrains Mono"
                     :height 80)
 
-(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
-               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
-               (36 . ".\\(?:>\\)")
-               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
-               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
-               (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
-               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
-               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
-               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
-               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
-               (48 . ".\\(?:x[a-zA-Z]\\)")
-               (58 . ".\\(?:::\\|[:=]\\)")
-               (59 . ".\\(?:;;\\|;\\)")
-               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
-               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
-               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
-               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
-               (91 . ".\\(?:]\\)")
-               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
-               (94 . ".\\(?:=\\)")
-               (119 . ".\\(?:ww\\)")
-               (123 . ".\\(?:-\\)")
-               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
-               )
-             ))
+;; Gathered from https://www.jetbrains.com/lp/mono/#ligatures
+;; The cheatsheat shows "\/" and "\" which I couldn't get working
+(let ((alist '(;;  -> -- --> ->> -< -<< --- -~ -|
+               (?- . ".\\(?:--\\|[->]>?\\|<<?\\|[~|]\\)")
+
+               ;; // /* /// /= /== />
+               ;; /** is not supported - see https://github.com/JetBrains/JetBrainsMono/issues/202
+               ;; /* cannot be conditioned on patterns followed by a whitespace,
+               ;; because that would require support for lookaheads in regex.
+               ;; We cannot just match on /*\s, because the whitespace would be considered
+               ;; as part of the match, but the font only specifies the ligature for /* with
+               ;; no trailing characters
+               ;;
+               (?/ . ".\\(?://?\\|==?\\|\\*\\*?\\|[>]\\)")
+
+               ;; */ *** *>
+               ;; Prevent grouping of **/ as *(*/) by actively looking for **/
+               ;; which consumes the triple but the font does not define a substitution,
+               ;; so it's rendered normally
+               (?* . ".\\(?:\\*/\\|\\*\\*\\|[>/]\\)")
+
+               ;; <!-- <<- <- <=> <= <| <|| <||| <|> <: <> <-< <<< <=< <<= <== <==>
+               ;; <~> << <-| <=| <~~ <~ <$> <$ <+> <+ <*> <* </ </> <->
+               (?< . ".\\(?:==>\\|!--\\|~~\\|-[|<]\\||>\\||\\{1,3\\}\\|<[=<-]?\\|=[><|=]?\\|[*+$~/-]>?\\|[:>]\\)")
+
+               ;; := ::= :?> :? :: ::: :< :>
+               (?: . ".\\(?:\\?>\\|:?=\\|::?\\|[>?<]\\)")
+
+               ;; == =:= === => =!= =/= ==> =>>
+               (?= . ".\\(?:[=>]?>\\|[:=!/]?=\\)")
+
+               ;;  != !== !!
+               (?! . ".\\(?:==?\\|!\\)")
+
+               ;; >= >> >] >: >- >>> >>= >>- >=>
+               (?> . ".\\(?:=>\\|>[=>-]\\|[]=:>-]\\)")
+
+               ;; && &&&
+               (?& . ".&&?")
+
+               ;; || |> ||> |||> |] |} |-> |=> |- ||- |= ||=
+               (?| . ".\\(?:||?>\\||[=-]\\|[=-]>\\|[]>}|=-]\\)")
+
+               ;; ... .. .? .= .- ..<
+               (?. . ".\\(?:\\.[.<]?\\|[.?=-]\\)")
+
+               ;; ++ +++ +>
+               (?+ . ".\\(?:\\+\\+?\\|>\\)")
+
+               ;; [| [< [||]
+               (?\[ . ".\\(?:|\\(?:|]\\)?\\|<\\)")
+
+               ;; {|
+               (?{ . ".|")
+
+               ;; ?: ?. ?? ?=
+               (?? . ".[:.?=]")
+
+               ;; ## ### #### #{ #[ #( #? #_ #_( #: #! #=
+               (?# . ".\\(?:#\\{1,3\\}\\|_(?\\|[{[(?:=!]\\)")
+
+               ;; ;;
+               (?\; . ".;")
+
+               ;; __ _|_
+               (?_ . ".|?_")
+
+               ;; ~~ ~~> ~> ~= ~- ~@
+               (?~ . ".\\(?:~>\\|[>@=~-]\\)")
+
+               ;; $>
+               (?$ . ".>")
+               
+               ;; ^=
+               (?^ . ".=")
+
+               ;; ]#
+               (?\] . ".#")
+               )))
   (dolist (char-regexp alist)
     (set-char-table-range composition-function-table (car char-regexp)
                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
