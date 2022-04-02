@@ -1,0 +1,24 @@
+#!/bin/sh
+
+test -f ~/.Xresources && xrdb -merge -I$HOME ~/.Xresources
+
+unclutter &
+
+display_adj.sh = &
+touchpad_setup.sh &
+touchscreen_setup.sh &
+# dwm_status.sh &
+setxkbmap -option caps:ctrl_modifier -layout us,us,cz -variant ,colemak,qwerty
+
+systemctl --user start fehbg.timer
+
+brave &
+# alacritty &
+# wait for emacs in a subshell
+(systemctl --user start emacs && emacsclient -c) &
+# oneko -rv &
+xss-lock slock &
+xbindkeys -fg "$XDG_CONFIG_HOME"/xbindkeys/config.scm
+
+monitor_setup.sh
+exec bspwm
