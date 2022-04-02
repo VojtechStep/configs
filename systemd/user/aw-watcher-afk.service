@@ -1,0 +1,11 @@
+[Unit]
+Description=ActivityWatch AFK Watcher
+After=display-manager.service
+
+[Service]
+ExecStart=aw-watcher-afk
+Restart=on-failure
+Environment=DISPLAY=:0 XAUTHORITY=/run/user/1000/Xauthority
+
+[Install]
+WantedBy=default.target

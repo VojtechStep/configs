@@ -1,0 +1,8 @@
+[Unit]
+Description=Sync email every hour
+
+[Timer]
+OnUnitActiveSec=1hour
+
+[Install]
+WantedBy=timers.target

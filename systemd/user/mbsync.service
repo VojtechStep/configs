@@ -1,0 +1,6 @@
+[Unit]
+Description=Mailbox synchronization service
+
+[Service]
+Environment=DISPLAY=:0 XAUTHORITY=/run/user/1000/Xauthority GNUPGHOME=%h/.local/share/gnupg
+ExecStart=/usr/bin/mbsync -Va -c %h/.config/isync/mbsyncrc

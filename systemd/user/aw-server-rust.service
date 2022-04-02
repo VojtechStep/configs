@@ -1,0 +1,11 @@
+[Unit]
+Description=ActivityWatch Server (Rust implementation)
+Wants=network.target
+
+[Service]
+Type=simple
+ExecStart=aw-server-rust
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
