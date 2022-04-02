@@ -1,53 +1,83 @@
-function load-env -a script
-  source $script $script
+# Environment variables
+
+if test -f $__fish_config_dir/environment.fish
+    source $__fish_config_dir/environment.fish
 end
 
-load-env ~/.envs.el
+# Interactive candy
+if status --is-interactive
 
-set -U fish_user_paths
-abbr -a :q exit
+    type direnv &>/dev/null && direnv hook fish | source
 
-abbr -a v $VISUAL
-abbr -a e emacsclient -c
-abbr -a em emacs
-abbr -a rem systemctl --user restart emacs
-abbr -a eap 'emacsclient --eval "(projectile-add-known-project \""(pwd)"\")"'
+    if type zoxide &>/dev/null
+        zoxide init fish --no-aliases | source
+        function z
+            __zoxide_z $argv
+        end
+        function zi
+            __zoxide_zi $argv
+        end
+        function za
+            __zoxide_za $argv
+        end
+        function zr
+            __zoxide_zr $argv
+        end
+    end
 
-abbr -a qmk 'docker run -it --rm -v (pwd)":/qmk_firmware" qmkfm/base_container make -C /qmk_firmware/ ergodox_ez:vojtechstep'
+    # Taken from https://github.com/akermu/emacs-libvterm#shell-side-configuration
+    function vterm-printf
+        if [ -n "$TMUX" ]
+            # tell tmux to pass the escape sequences through
+            # (Source: http://permalink.gmane.org/gmane.comp.terminal-emulators.tmux.user/1324)
+            printf "\ePtmux;\e\e]%s\007\e\\" "$argv"
+        else if string match -q -- "screen*" "$TERM"
+            # GNU screen (screen, screen-256color, screen-256color-bce)
+            printf "\eP\e]%s\007\e\\" "$argv"
+        else
+            printf "\e]%s\e\\" "$argv"
+        end
+    end
+    function vterm-prompt-end
+        vterm-printf "51;A"(whoami)"@"(uname -n)":"(pwd)
+    end
+    functions --copy fish_prompt vterm-old-prompt &>/dev/null
+    function fish_prompt
+        printf "%b" (string join "\n" (vterm-old-prompt))
+        vterm-prompt-end
+    end
 
+    abbr -a v $VISUAL
+    abbr -a e emacsclient -c
 
-abbr -a ls exa -l
-abbr -a la exa -la
+    abbr -a rm rm -I
 
-abbr -a shitdown systemctl poweroff
-abbr -a shutdown systemctl poweroff
+    abbr -a ls exa -l
+    abbr -a la exa -la
 
-abbr -a maek make
+    abbr -a shutdown systemctl poweroff
 
-abbr -a a archey4
+    abbr -a gis git status
+    abbr -a gif git fetch
+    abbr -a gip git pull
+    abbr -a gipl git plog
+    abbr -a gipo git plog HEAD..origin/master
+    abbr -a gdo git diff HEAD origin/master
 
-abbr dr docker run -it --rm
+    abbr -a vf nvim ~/.config/fish/config.fish
+    abbr -a vv nvim ~/.config/nvim/init.vim
 
-abbr gis git status
-abbr gif git fetch
-abbr gip git pull
-abbr gipl git plog
-abbr gipo git plog origin/master
-abbr gdo git diff HEAD origin/master
-abbr gh git clone git@github.com:
-abbr gl git clone git@gitlab.fel.cvut.cz:
+    abbr -a serve miniserve --index index.html
 
-abbr vf nvim ~/.config/fish/config.fish
-abbr vv nvim ~/.config/nvim/init.vim
+    abbr -a sc systemctl
+    abbr -a scu systemctl --user
+    abbr -a ssc sudo systemctl
+    abbr -a bt bluetoothctl
+end
 
+# Login shell
 if status --is-login
-  if test -z "$DISPLAY" -a $XDG_VTNR = 1
-    exec startx -- -ardelay 300 -arinterval 30
-  end
+    if test -z "$DISPLAY" -a $XDG_VTNR = 1
+        exec startx "$XINITRC" -- -ardelay 300 -arinterval 30 &>"$XDG_DATA_HOME/xorg/Xorg.log"
+    end
 end
-
-if test -f ~/.config/fish/autojump.fish
-  source ~/.config/fish/autojump.fish
-end
-
-type nvm >/dev/null ^/dev/null; and nvm use 10
