@@ -1,0 +1,20 @@
+#!/bin/sh
+
+wid=$1
+class=$2
+instance=$3
+consequences=$4
+
+rundir="$XDG_RUNTIME_DIR"
+
+if [ "$class" = Brave-browser ]; then
+  # For the first run of Brave
+  brave_start_file="$rundir/brave-started"
+  if [ ! -e $brave_start_file ]; then
+    # Put it on the second desktop
+    # And don't switch to it
+    echo "desktop=focused:^2"
+    echo "focus=off"
+    touch $brave_start_file
+  fi
+fi

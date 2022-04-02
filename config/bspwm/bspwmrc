@@ -1,0 +1,64 @@
+#!/bin/sh
+
+
+# Pointer behavior
+bspc config focus_follows_pointer true
+bspc config pointer_follows_focus false
+bspc config pointer_follows_monitor true
+
+## Don't autofocus urgent windows
+# Well actually do, because that's how 1-1 Emacs focuses frames
+bspc config ignore_ewmh_focus false
+
+PAD=20
+bspc config top_monocle_padding $PAD
+bspc config left_monocle_padding $PAD
+bspc config right_monocle_padding $PAD
+bspc config bottom_monocle_padding $PAD
+
+# Window "decoration"
+BW=1
+BAR_HEIGHT=30
+bspc config border_width $BW
+bspc config window_gap -$BW
+for side in left bottom right; do
+  bspc config ${side}_padding $BW
+done
+bspc config top_padding $((BAR_HEIGHT+BW))
+bspc config focused_border_color "#de935f"
+
+DESKS="  3 4 5 6 7 8 9"
+FLOATING="term-mixer ping-mon rofi-systemd-status blutooth-cons"
+
+# Desktops setup
+monitor_setup.sh
+for mon in $(xrandr --query | rg "^([^ ]+) connected" -or \$1); do
+  ds=
+  for d in $DESKS; do
+    ds="$ds ${mon}_$d"
+  done
+  bspc monitor $mon -d $ds
+done
+
+# TODO: Move windows between desktops:
+# bspc node @eDP1_n:/ -d DP1_n
+
+# Window rules
+bspc rule -r *
+# bspc rule -a Brave-browser focus=off desktop=focused:^2
+bspc rule -a Emacs state=tiled
+bspc rule -a mpv state=pseudo_tiled
+bspc rule -a bar layer=above
+for f in $FLOATING; do
+  bspc rule -a Alacritty:$f state=floating
+done
+
+bspc config external_rules_command "$(dirname $(realpath $0))/external_rules"
+
+if ! [ -d "$XDG_CACHE_HOME"/assam ]; then
+  mkdir -p "$XDG_CACHE_HOME"/assam
+fi
+if pgrep -x "assam"; then
+  pkill -x assam
+fi
+assam 2>~/.local/share/xorg/assam.log | lemonbar -g x$BAR_HEIGHT -f "JetBrains Mono:size=14" -f "Symbols Nerd Font:size=18" -f "Noto Sans JP:size=14" -B "#1d1f21" -o 1 -u 2 &
