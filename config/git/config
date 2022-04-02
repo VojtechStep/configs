@@ -1,0 +1,14 @@
+[alias]
+	plog = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[core]
+	autocrlf = input
+	pager = delta
+[init]
+	defaultBranch = main
+[delta]
+	side-by-side = true
+  hunk-header-style = omit
+[interactive]
+	diffFilter = delta --color-only
+[diff]
+	colorMoved = default
