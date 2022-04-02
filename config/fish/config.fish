@@ -43,6 +43,10 @@ if status --is-interactive
     end
     functions --copy fish_prompt vterm-old-prompt &>/dev/null
     function fish_prompt
+        if set -q IN_NIX_SHELL
+            set_color cyan
+            printf "[N] "
+        end
         printf "%b" (string join "\n" (vterm-old-prompt))
         vterm-prompt-end
     end
