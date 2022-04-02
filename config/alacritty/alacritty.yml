@@ -13,6 +13,15 @@ window:
   #     - buttonless: Title bar, transparent background, but no title bar buttons
   decorations: none
 
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
+
+  # Background opacity
+  #
+  # Window opacity as a floating point number from `0.0` to `1.0`.
+  # The value `0.0` is completely transparent and `1.0` is opaque.
+  opacity: 1.0
+
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
@@ -71,7 +80,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 13.0
+  size: 12.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -79,7 +88,7 @@ font:
   x: 0
   y: 0
 
-draw_bold_text_with_bright_colors: false
+draw_bold_text_with_bright_colors: true
 
 # Colors (Tomorrow Night)
 colors:
@@ -103,18 +112,21 @@ colors:
     blue:    '#81a2be'
     magenta: '#b294bb'
     cyan:    '#8abeb7'
-    white:   '#373b41'
+    # white:   '#373b41'
+    white:   '#c5c8c6'
 
   # Bright colors
   bright:
-    black:   '#1d1f21'
+    # black:   '#1d1f21'
+    black:   '#969896'
     red:     '#cc6666'
     green:   '#b5bd68'
     yellow:  '#f0c674'
     blue:    '#81a2be'
     magenta: '#b294bb'
     cyan:    '#8abeb7'
-    white:   '#373b41'
+    # white:   '#373b41'
+    white:   '#ffffff'
   # bright:
   #   black:   '#666666'
   #   red:     '#ff3334'
@@ -162,25 +174,16 @@ colors:
 #   - Linear
 #
 # Specifying a `duration` of `0` will disable the visual bell.
-visual_bell:
+bell:
 #  animation: EaseOutExpo
   duration: 0
 #  color: '#ffffff'
-
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 1.0
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
-
-# Allow terminal applications to change Alacritty's window title.
-dynamic_title: true
 
 cursor:
   # Cursor style
@@ -404,8 +407,13 @@ alt_send_esc: true
 # at once.
 
 key_bindings:
-  - { key: A,                         mode: Vi,   action: ToggleViMode }
-  - { key: Escape,                    mode: Vi,   action: ToggleViMode }
+  - { key: A,                      mode:  Vi, action: ScrollToBottom }
+  - { key: A,                      mode:  Vi, action: ToggleViMode   }
+  - { key: Q,                      mode:  Vi, action: ScrollToBottom }
+  - { key: Q,                      mode:  Vi, action: ToggleViMode   }
+  - { key: U, mods: Shift|Control, mode: ~Vi, action: None           }
+  - { key: H, mods: Shift,         mode:  Vi, action: FirstOccupied }
+  - { key: L, mods: Shift,         mode:  Vi, action: Last          }
 
 #key_bindings:
   #- { key: Paste,                                action: Paste          }
