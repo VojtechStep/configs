@@ -54,15 +54,16 @@ let g:rooter_silent_chdir = 1
 Plug 'airblade/vim-rooter'
 
 " Fuzzy search in project files, open files
-Plug '/usr/share/vim/vimfiles' " Managed via pacman
+" Plug '/usr/share/vim/vimfiles' " Managed via pacman
+Plug '~/.nix-profile/share/vim-plugins/fzf'
 Plug 'junegunn/fzf.vim'
 
 " Languages
 " ==============================================================================
 "
 " LSP interface
-Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'jackguo380/vim-lsp-cxx-highlight', { 'for': ['c', 'cpp'] }
+" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" Plug 'jackguo380/vim-lsp-cxx-highlight', { 'for': ['c', 'cpp'] }
 
 " Plug 'neovim/nvim-lsp'
 
@@ -100,7 +101,7 @@ Plug 'ziglang/zig.vim'
 Plug 'JesseKPhillips/d.vim'
 
 " Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
 
 " Misc plugins
 " ==============================================================================
@@ -108,11 +109,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 " Base16 color schemes
 Plug 'chriskempson/base16-vim'
 
-" WakaTime time tracking
-if executable("wakatime")
-  let g:wakatime_OverrideCommandPrefix = exepath("wakatime")
-endif
-Plug 'wakatime/vim-wakatime'
+" ActivityWatch time tracking
+Plug 'ActivityWatch/aw-watcher-vim'
 
 " Pretty status line
 " Plug 'vim-airline/vim-airline'
@@ -145,56 +143,56 @@ nmap <space> <nop>
 cmap <C-g> <C-c>
 
 " Insert mode autocomplete
-inoremap <silent> <expr> <C-Space> coc#refresh()
-inoremap <silent> <C-d> <C-O>:call CocActionAsync('showSignatureHelp')<CR>
+" inoremap <silent> <expr> <C-Space> coc#refresh()
+" inoremap <silent> <C-d> <C-O>:call CocActionAsync('showSignatureHelp')<CR>
 
 " LSP keybindings
 "
 " Symbol information
-nmap <silent> gh :call CocActionAsync('doHover')<CR>
+" nmap <silent> gh :call CocActionAsync('doHover')<CR>
 
-nmap <silent> <leader>h :call CocActionAsync('highlight')<CR>
+" nmap <silent> <leader>h :call CocActionAsync('highlight')<CR>
 
 " Error/Warning information
-nmap <silent> <leader>e <Plug>(coc-diagnostic-info)
+" nmap <silent> <leader>e <Plug>(coc-diagnostic-info)
 
 " Jump to definition
-nmap <silent> <leader>d <Plug>(coc-definition)
+" nmap <silent> <leader>d <Plug>(coc-definition)
 
 " Jump to implementation
-nmap <silent> <leader>i <Plug>(coc-implementation)
+" nmap <silent> <leader>i <Plug>(coc-implementation)
 
 " Jump to references
-nmap <silent> <leader>r <Plug>(coc-references)
+" nmap <silent> <leader>r <Plug>(coc-references)
 
 " Rename symbol
-nmap <silent> <F2> <Plug>(coc-rename)
+" nmap <silent> <F2> <Plug>(coc-rename)
 
 " Format document
-nmap <silent> <A-F> <Plug>(coc-format)
+" nmap <silent> <A-F> <Plug>(coc-format)
 
 " Format selection
-vmap <silent> <A-F> <Plug>(coc-format-selected)
+" vmap <silent> <A-F> <Plug>(coc-format-selected)
 
 " Show codelens actions
-nmap <silent> <leader>c <Plug>(coc-codelens-action)
+" nmap <silent> <leader>c <Plug>(coc-codelens-action)
 
 " Do quickfix
-nmap <silent> <leader>q :CocAction<CR>
+" nmap <silent> <leader>q :CocAction<CR>
 
 " Jump to next warning/error
-nmap <silent> <F8> <Plug>(coc-diagnostic-next)
+" nmap <silent> <F8> <Plug>(coc-diagnostic-next)
 
 " Jump to previous warning/error
-nmap <silent> <F20> <Plug>(coc-diagnostic-prev)
+" nmap <silent> <F20> <Plug>(coc-diagnostic-prev)
 
-nmap <silent> <leader>sd :CocList diagnostics<CR>
+" nmap <silent> <leader>sd :CocList diagnostics<CR>
 
 function! s:show_documentation()
   if &filetype == 'vim' || &filetype == 'help'
     execute 'h '.expand('<cword>')
   else
-    call CocActionAsync('doHover')
+    " call CocActionAsync('doHover')
     " call LspHover
   endif
 endfunction
@@ -207,10 +205,12 @@ noremap <C-Down> <C-W>+
 noremap <C-Up> <C-W>-
 
 " Scroll if has popup, jump othewise
-nmap <silent> <expr> <C-k> coc#util#has_float() && coc#util#float_scrollable() ? ":call coc#util#float_scroll(0)<CR>" : ":wincmd W<CR>"
+" nmap <silent> <expr> <C-k> coc#util#has_float() && coc#util#float_scrollable() ? ":call coc#util#float_scroll(0)<CR>" : ":wincmd W<CR>"
+nmap <silent> <expr> <C-k> ":wincmd W<CR>"
 
 imap <silent> <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-nmap <silent> <expr> <C-j> coc#util#has_float() && coc#util#float_scrollable() ? ":call coc#util#float_scroll(1)<CR>" : ":wincmd w<CR>"
+" nmap <silent> <expr> <C-j> coc#util#has_float() && coc#util#float_scrollable() ? ":call coc#util#float_scroll(1)<CR>" : ":wincmd w<CR>"
+nmap <silent> <expr> <C-j> ":wincmd w<CR>"
 imap <silent> <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <silent> <expr> <C-l> pumvisible() ? "<C-y>" : "\<C-l>"
 
@@ -313,7 +313,8 @@ nnoremap <silent> <leader>ca :%bd<bar>e#<bar>bd#<CR>
 " Close buffer
 nnoremap <silent> <leader>cc :bw<CR>
 " Hide popup or stop highlight
-nmap <silent> <expr> <ESC> coc#util#has_float() ? ":call coc#util#float_hide()<CR>" : ":noh<CR>"
+" nmap <silent> <expr> <ESC> coc#util#has_float() ? ":call coc#util#float_hide()<CR>" : ":noh<CR>"
+nmap <silent> <expr> <ESC> ":noh<CR>"
 
 " Open terminal to the right
 map <silent> <leader><BS> :vsp term://fish<CR>
@@ -341,6 +342,8 @@ map H ^
 map L $
 imap <C-h> <C-o>H
 imap <C-l> <C-o>L
+
+imap <C-S-u> <C-v>u
 
 noremap ; :
 
@@ -420,7 +423,7 @@ set wildmenu
 set wildmode=longest,list
 
 " Save undo history for all files in a directory
-set undodir=~/.vimundo
+set undodir=~/.cache/vimundo
 set undofile
 
 " Only hide closing buffers

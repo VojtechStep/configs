@@ -37,6 +37,10 @@
     "dls": {
       "command": "dls",
       "filetypes": ["d"]
+    },
+    "zls": {
+      "command": "zls",
+      "filetypes": ["zig"]
     }
   },
   "coc.preferences.formatOnType": true,
