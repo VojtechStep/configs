@@ -1,7 +1,26 @@
+---
 BasedOnStyle: LLVM
 UseTab: Never
 IndentWidth: 2
-BreakBeforeBraces: Allman
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: true
+  AfterClass: true
+  AfterControlStatement: Always
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterObjCDeclaration: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: false
+  BeforeCatch: true
+  BeforeElse: true
 AllowShortIfStatementsOnASingleLine: false
 IndentCaseLabels: true
+IndentExternBlock: NoIndent
 ColumnLimit: 0
+---
+Language: Java
+BreakBeforeBraces: Attach
+JavaImportGroups: ['java.util', 'java', 'cz', 'org', 'com']
