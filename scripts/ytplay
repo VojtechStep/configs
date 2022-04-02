@@ -1,0 +1,19 @@
+#!/bin/sh
+
+SEARCH="$@"
+if [ -z "$SEARCH" ]; then
+  echo -n "Search for: "
+  read SEARCH
+else
+  echo Searching "$SEARCH"
+fi
+
+[ -z "$SEARCH" ] && exit
+
+ytsearch "$SEARCH" |\
+  jq -r '.items[] | select(.type == "video") | {title, author: .author.name, link, description, uploaded_at} | join("\f")' |\
+  env SHELL=/bin/sh fzf --delimiter="\f" --with-nth=1 --cycle -m --sync \
+      --preview="printf \"%s\n\033[1m%s\033[0m\n\033[3m%s\033[0m\n\n%s\" {1} {2} {5} {4}" \
+      --preview-window="up:wrap" |\
+  cut -d"" -f3 |\
+  xargs -r mpv

@@ -7,10 +7,11 @@ if [ -z "$*" ] || [ "$*" = "-h" ] || [ "$*" = "--help" ]; then
     echo "COMMAND		Command to be run"
     echo "ARGS		Arguments to be passed to the command"
     echo ""
-    echo "The utility accepts the same arguments as xargs."
+    echo "Run the COMMAND with ARGS and append the working directory"
+    echo "of the focused window as the last argument"
     echo ""
     echo "EXAMPLE"
-    echo "  here.sh -I{} emacs --chdir \"{}\""
+    echo "  here.sh emacs --chdir"
     exit 1
 fi
 
@@ -18,7 +19,8 @@ run() {
     if [ x$dir = x ]; then
         dir=$HOME
     fi
-    echo $dir | xargs $@
+    # echo $dir | exec xargs $@
+    exec $@ $dir
 }
 
 # Get active window and corresponding process
@@ -29,16 +31,16 @@ parent=$(xprop -root _NET_ACTIVE_WINDOW \
 
 if [ x$parent = x ]; then
     run $@
-    exit
+    exit 2
 fi
 
 # Get children processes
 #
 # If the active window is a terminal emulator, the child will
 # be the shell process
-# 
+#
 # If the active window is an emacs instance, there is no child
-# 
+#
 # If the active window is a chromium instance, there will be multiple
 # children
 children=$(ps hopid --ppid "$parent" | tr -d ' ')
@@ -57,3 +59,4 @@ else
 fi
 
 run $@
+exit 2

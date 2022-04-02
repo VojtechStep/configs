@@ -2,9 +2,18 @@
 
 scr_dir="$SCREENSHOT_DIR"
 
-if [ "$scr_dir" = "" ]; then
+if [ -z "$scr_dir" ]; then
 	scr_dir="$HOME/Screenshots"
 fi
+
+if ! [ -d "$scr_dir" ]; then
+  mkdir -p "$scr_dir"
+fi
+
+gen_file_name(){
+  win_name=${1:-screen}
+	echo "$scr_dir/$(date +"%Y%m%d.%H%M%S").${win_name}.png"
+}
 
 take_screenshot_of_window(){
 	# $1 - window ID
@@ -12,16 +21,15 @@ take_screenshot_of_window(){
 	win_id=$1
 	win_name=$2
 
-	if [ "$win_name" = "" ]; then
-		win_name="screen"
-	fi
+  file_loc=$(gen_file_name $win_name)
 
-	file_loc="$scr_dir/$(date +"%Y%m%d.%H%M%S").$win_name.png"
-	if [ "$win_id" = "" ]; then
+	if [ -z "$win_id" ]; then
 		import $file_loc
 	else
 		import -window $1 $file_loc
 	fi
+
+  xclip -sel clip -t image/png < $file_loc
 }
 
 notify.sh "Taking a screenshot" &
@@ -37,4 +45,7 @@ case $1 in
 	select)
 		take_screenshot_of_window
 		;;
+  filename)
+    gen_file_name $2
+    ;;
 esac

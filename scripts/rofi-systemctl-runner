@@ -1,0 +1,13 @@
+#!/bin/sh
+
+rofi -modi 'systemctl:rofi-systemctl' -show systemctl 2>&1 | while read cmd; do
+  if case $cmd in DOCMD:*) true;; *) false;; esac then
+    realcmd=$(echo $cmd | tail -c +7)
+    echo Performing $realcmd >/dev/stderr
+    # Probably should pipe it to some notification
+    export SUDO_ASKPASS=~/.local/bin/scripts/rofi-askpass
+    exec $realcmd
+  else
+    echo Invalid command: $cmd >/dev/stderr
+  fi
+done

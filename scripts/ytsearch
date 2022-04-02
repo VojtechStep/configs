@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [ -z "$*" ]; then
+  echo "Search string is required"
+  exit 1
+fi
+
+result=1
+attempts=0
+
+while [ $result -ne 0 -a $attempts -lt 25 ]; do
+  env NODE_PATH=$(npm root -g) node --unhandled-rejections=strict -e "const p=require('process');require('ytsr')(p.argv.slice(p.argv.indexOf('-')+1).join(' '), {limit: 20}).then(r => require('process').stdout.write(JSON.stringify(r)))" - "$@" 2>/dev/null
+  result=$?
+  attempts=$(($attempts+1))
+done
+
+if [ $result -ne 0 ]; then
+  echo "Unable to fetch data"
+  exit 1
+fi

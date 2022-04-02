@@ -1,0 +1,49 @@
+#!/bin/sh
+
+SCTL_ARGS="list-unit-files --type=service --no-pager --no-legend --plain"
+SCTL_ACTIONS="status\nstart\nstop\nrestart\n"
+AWK_CMD='{sub(/\.service$/,"",$1); meta=$5; for(i=6;i<=NF;i++){meta=meta" "$i}; printf "%-32s %s\000info\037service %s\n", substr($1,0,32), meta, ENVIRON["kind"]}'
+
+do_cmd() {
+  printf "DOCMD:%s\n" "$*" >&2
+}
+
+selected=$1
+
+case "$ROFI_RETV" in
+  0)
+    export kind=user
+    systemctl --user $SCTL_ARGS | awk "$AWK_CMD"
+    export kind=system
+    systemctl $SCTL_ARGS | awk "$AWK_CMD"
+    ;;
+  1)
+    if [ x"$ROFI_INFO" = x"quit" ]; then
+       exit 0
+    fi
+    read action kind <<EOF
+$(echo $ROFI_INFO)
+EOF
+    export action
+    export kind
+    if [ x"$action" = x"service" ]; then
+      export service=$(echo $selected | cut -d" " -f1)
+      printf "\000prompt\037%s\n" "$service"
+      echo -n $SCTL_ACTIONS | awk '{printf $1 "\000info\037%s %s\n", ENVIRON["service"], ENVIRON["kind"]}'
+    elif [ x"$selected" = x"status" ]; then
+      do_cmd alacritty --class rofi-systemd-status -e systemctl "--$kind" status "$action"
+    else
+      SCTL_CMD="systemctl --$kind $selected $action"
+      if [ x"$kind" = x"system" ]; then
+        SCTL_CMD="sudo -A $SCTL_CMD"
+      fi
+      # printf "\000message\037" $SCTL_CMD
+      do_cmd "$SCTL_CMD"
+      exit 0
+    fi
+    ;;
+  *)
+    printf "\000message\037Unknown stuffs"
+    exit 1
+    ;;
+esac

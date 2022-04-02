@@ -1,0 +1,9 @@
+#!/bin/sh
+
+emacsclient -c --eval \
+"(let ((mu4e-hide-index-messages t)) \
+  (switch-to-buffer \" *New Email*\") \
+  (set-window-dedicated-p nil 'yes) \
+  (with-window-non-dedicated nil \
+    (browse-url-mail \"$*\")))"
+exit 0

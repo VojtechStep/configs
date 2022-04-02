@@ -1,7 +1,7 @@
 #! /bin/sh
 
 INCREMENT=0.05
-CONFIG=$HOME/.config/brightness
+CONFIG=$XDG_CACHE_HOME/brightness
 
 if [ -f "$CONFIG" ]; then
 	LEVEL=$(cat $CONFIG)
