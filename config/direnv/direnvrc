@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Nix shell and Flake support
+source ~/.nix-profile/share/nix-direnv/direnvrc
