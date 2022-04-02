@@ -1,7 +1,7 @@
-;;; js.rc.el --- Configuration for JavaScript files
+;;; js.rc.el --- Configuration for JavaScript files  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
-;; 
+;;
 
 ;;; Code:
 

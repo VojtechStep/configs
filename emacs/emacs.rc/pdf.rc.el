@@ -20,16 +20,32 @@
 
 ;;; Commentary:
 
-;; 
+;;
 
 ;;; Code:
 
+(eval-when-compile
+  (require 'use-package)
+  (require 'mode-local))
+
 (use-package pdf-tools
-  :straight t
+  :straight (:fork (:repo "flatwhatson/pdf-tools"
+                    :branch "fix-macros"))
   :commands pdf-view-mode
   :mode ("\\.pdf\\'" . pdf-view-mode)
+  :hook
+  (pdf-view-mode . auto-revert-mode)
+  :custom
+  (pdf-misc-print-program "lp")
+  (pdf-util-convert-font "JetBrains-Mono-Regular")
   :config
-  (pdf-tools-install))
+  (setq-mode-local pdf-view-mode display-line-numbers nil)
+  (defalias 'pdf-misc-print-program #'pdf-misc-print-programm)
+  (require 'evil-collection)
+  (evil-collection-pdf-setup))
+
+;; For autoloads
+(use-package pdf-links)
 
 (provide 'pdf.rc)
 ;;; pdf.rc.el ends here

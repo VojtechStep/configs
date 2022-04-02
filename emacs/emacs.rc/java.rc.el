@@ -1,9 +1,12 @@
-;;; java.rc.el --- Configuration for Java files
+;;; java.rc.el --- Configuration for Java files  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
-;; 
+;;
 
 ;;; Code:
+
+(eval-when-compile
+  (require 'use-package))
 
 ;; (use-package lsp-java
 ;;   :defer t

@@ -1,9 +1,9 @@
-;;; auth.rc.el --- Configuration for auth-sources    -*- lexical-binding: t; -*-
+;;; python.rc.el --- Configuration for Python        -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020  Vojtech Stepancik
 
-;; Author: Vojtech Stepancik <adalbert@AdalbertDEV>
-;; Keywords: convenience, data, local, tools, unix
+;; Author: Vojtech Stepancik <vojtech.stepancik.2e@stu.hosei.ac.jp>
+;; Keywords: languages
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -20,19 +20,29 @@
 
 ;;; Commentary:
 
-;;
-
 ;;; Code:
 
 (eval-when-compile
   (require 'use-package))
 
-(use-package password-store
-  :straight t
-  :demand
+(use-package python-mode
   :custom
-  (auth-sources '(password-store))
-  (epg-pinentry-mode 'loopback))
+  (python-shell-interpreter "python")
+  (python-indent-guess-indent-offset nil))
 
-(provide 'auth.rc)
-;;; auth.rc.el ends here
+;; (use-package lsp-python-ms
+;;   :straight t
+;;   :hook (python-mode . (lambda ()
+;;                          (require 'lsp-python-ms)
+;;                          (setq lsp-python-ms-executable (executable-find "python-language-server"))
+;;                          (lsp-deferred))))
+
+(use-package lsp-pyright
+  :straight t
+  :hook
+  (python-mode . (lambda ()
+                   (require 'lsp-pyright)
+                   (lsp-deferred))))
+
+(provide 'python.rc)
+;;; python.rc.el ends here

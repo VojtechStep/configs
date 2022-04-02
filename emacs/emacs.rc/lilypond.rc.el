@@ -1,9 +1,9 @@
-;;; auth.rc.el --- Configuration for auth-sources    -*- lexical-binding: t; -*-
+;;; lilypond.rc.el --- Configuration for lilypond-mode  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020  Vojtech Stepancik
 
 ;; Author: Vojtech Stepancik <adalbert@AdalbertDEV>
-;; Keywords: convenience, data, local, tools, unix
+;; Keywords:
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -24,15 +24,9 @@
 
 ;;; Code:
 
-(eval-when-compile
-  (require 'use-package))
+(use-package lilypond-mode
+  :load-path "/usr/share/emacs/site-lisp")
 
-(use-package password-store
-  :straight t
-  :demand
-  :custom
-  (auth-sources '(password-store))
-  (epg-pinentry-mode 'loopback))
 
-(provide 'auth.rc)
-;;; auth.rc.el ends here
+(provide 'lilypond.rc)
+;;; lilypond.rc.el ends here

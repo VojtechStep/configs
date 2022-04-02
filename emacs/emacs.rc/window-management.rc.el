@@ -1,9 +1,9 @@
-;;; auth.rc.el --- Configuration for auth-sources    -*- lexical-binding: t; -*-
+;;; window-management.rc.el --- Configuration related to managing windows  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020  Vojtech Stepancik
 
 ;; Author: Vojtech Stepancik <adalbert@AdalbertDEV>
-;; Keywords: convenience, data, local, tools, unix
+;; Keywords: frames
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -24,15 +24,19 @@
 
 ;;; Code:
 
-(eval-when-compile
-  (require 'use-package))
+(setq pop-up-frames 'graphic-only)
+(setq frame-auto-hide-function #'delete-frame)
 
-(use-package password-store
-  :straight t
-  :demand
-  :custom
-  (auth-sources '(password-store))
-  (epg-pinentry-mode 'loopback))
+;; (advice-add 'set-window-dedicated-p :override #'ignore)
 
-(provide 'auth.rc)
-;;; auth.rc.el ends here
+;; I honestly don't have much of an idea of what I'm doing here
+(setq display-buffer-alist
+      '(("\\*python-bg\\*" display-buffer-no-window
+         (allow-no-window . t))
+        ("\\*Org PDF LaTeX Output\\*" display-buffer-no-window
+         (allow-no-window . t))
+        (".*" ()
+         (reusable-frames . t))))
+
+(provide 'window-management.rc)
+;;; window-management.rc.el ends here

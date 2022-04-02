@@ -1,4 +1,4 @@
-;;; straight.rc --- Configuration for straight.el
+;;; straight.rc --- Configuration for straight.el  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
@@ -7,15 +7,18 @@
 (eval-when-compile
   (require 'cl-lib))
 
+(eval-and-compile
+  (require 'xdg))
+
 (defvar straight-check-for-modifications '(find-when-checking check-on-save))
+(defvar straight-repository-branch "develop")
 (defvar straight-vc-git-default-protocol 'ssh)
 (defvar straight-vc-git-default-clone-depth 1)
 
-(defvar vs/cache-dir)
+(defvar vs/cache-dir (expand-file-name "emacs" (xdg-cache-home)))
 
 (let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" vs/cache-dir))
-      (bootstrap-version 5))
+      (expand-file-name "straight/repos/straight.el/bootstrap.el" vs/cache-dir)))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously

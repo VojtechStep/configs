@@ -1,9 +1,9 @@
-;;; auth.rc.el --- Configuration for auth-sources    -*- lexical-binding: t; -*-
+;;; modeline.rc.el --- Configuration for modeline    -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020  Vojtech Stepancik
 
-;; Author: Vojtech Stepancik <adalbert@AdalbertDEV>
-;; Keywords: convenience, data, local, tools, unix
+;; Author: Vojtech Stepancik <vojtechstepancik@outlook.com>
+;; Keywords: convenience
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -20,19 +20,19 @@
 
 ;;; Commentary:
 
-;;
-
 ;;; Code:
 
 (eval-when-compile
   (require 'use-package))
 
-(use-package password-store
-  :straight t
-  :demand
-  :custom
-  (auth-sources '(password-store))
-  (epg-pinentry-mode 'loopback))
+(use-package vs-modeline
+  :straight (vs-modeline :type git
+                         :host github
+                         :repo "VojtechStep/vs-modeline.el"
+                         :local-repo "~/Code/VojtechStep/Projects/vs-modeline.el")
+  :demand t
+  :config
+  (vs-modeline-mode))
 
-(provide 'auth.rc)
-;;; auth.rc.el ends here
+(provide 'modeline.rc)
+;;; modeline.rc.el ends here

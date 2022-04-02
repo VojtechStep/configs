@@ -19,9 +19,12 @@
 
 ;;; Commentary:
 
-;; 
+;;
 
 ;;; Code:
+
+(eval-when-compile
+  (require 'use-package))
 
 (use-package csv-mode
   :straight t

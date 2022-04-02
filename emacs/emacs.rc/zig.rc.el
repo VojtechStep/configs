@@ -1,9 +1,9 @@
-;;; auth.rc.el --- Configuration for auth-sources    -*- lexical-binding: t; -*-
+;;; zig.rc.el --- Configuration for Zig              -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020  Vojtech Stepancik
 
 ;; Author: Vojtech Stepancik <adalbert@AdalbertDEV>
-;; Keywords: convenience, data, local, tools, unix
+;; Keywords: languages
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -27,12 +27,26 @@
 (eval-when-compile
   (require 'use-package))
 
-(use-package password-store
+(use-package zig-mode
   :straight t
-  :demand
   :custom
-  (auth-sources '(password-store))
-  (epg-pinentry-mode 'loopback))
+  (zig-format-on-save nil)
+  :hook
+  (zig-mode . (lambda ()
+                (apheleia-mode)
+                (auto-fill-mode -1)
+                (lsp-deferred)))
+  :config
+  (when (require 'apheleia nil t)
+    (cl-pushnew '(zig-fmt "zig" "fmt" "--stdin") apheleia-formatters)
+    (cl-pushnew '(zig-mode . zig-fmt) apheleia-mode-alist))
+  (when (require 'lsp-mode nil t)
+    (cl-pushnew '(zig-mode . "zig") lsp-language-id-configuration)
+    (lsp-register-client
+     (make-lsp-client
+      :new-connection (lsp-stdio-connection "zls")
+      :major-modes '(zig-mode)
+      :server-id 'zls))))
 
-(provide 'auth.rc)
-;;; auth.rc.el ends here
+(provide 'zig.rc)
+;;; zig.rc.el ends here

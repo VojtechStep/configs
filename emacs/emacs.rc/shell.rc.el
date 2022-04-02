@@ -20,14 +20,109 @@
 
 ;;; Commentary:
 
-;; 
+;;
 
 ;;; Code:
+
+(eval-when-compile
+  (require 'use-package))
+
+(require 'vs-utils.rc)
+(require 'mode-local)
+
+(use-package sh-script
+  :init
+  (defvaralias 'sh-basic-offset 'tab-width))
 
 (use-package fish-mode
   :straight t
   :init
   (defvaralias 'fish-indent-offset 'tab-width))
+
+(use-package esh-autosuggest
+  :straight t
+  :hook (eshell-mode . esh-autosuggest-mode))
+
+(use-package fish-completion
+  :straight (:protocol https)
+  :hook (eshell-mode . fish-completion-mode))
+
+(use-package eshell
+  :custom
+  (eshell-prompt-function #'vs/--eshell-prompt)
+  (eshell-prompt-regexp "^[^>\n]*> ")
+  :hook
+  (eshell-mode . (lambda ()
+                   (setq truncate-lines nil)))
+  :init
+  (defmacro vs/--eshell-segment (form fg &optional bg &rest props)
+    (declare (indent defun))
+    (unless bg
+      (setq bg ''term-color-black))
+    (list 'propertize
+          form
+          ''face
+          (append
+           `(list :background (face-background ,bg)
+                  :foreground (face-foreground ,fg))
+           props)))
+  (defun vs/--eshell-prompt ()
+    (concat
+     (vs/--eshell-segment (user-login-name)
+       'term-color-green
+       'term-color-black)
+     (vs/--eshell-segment "@"
+       'term-color-white)
+     (vs/--eshell-segment (system-name)
+       'term-color-white)
+     " "
+     (vs/--eshell-segment (vs/fishy-abbrev (abbreviate-file-name (eshell/pwd)))
+       'term-color-green)
+     (when-let ((branch (and (fboundp 'magit-get-current-branch)
+                             (magit-get-current-branch))))
+       (vs/--eshell-segment (format " (%s)" branch)
+         'term-color-white))
+     (vs/--eshell-segment "> "
+       'term-color-white)))
+
+  (defun eshell/j (&rest args)
+    (setq args (flatten-tree args))
+    (cond
+     ;; No arguments -> home
+     ((null args) (eshell/cd))
+     ;; One argument "-" -> previous dir
+     ((and (null (cdr args))
+           (equal (car args) "-"))
+      (eshell/cd "-"))
+     ((and (null (cdr args))
+           (file-directory-p (expand-file-name
+                              (car args)
+                              default-directory)))
+      (eshell/cd (car args)))
+     (t (eshell/cd (vs/zoxide-query (string-join args " "))))))
+
+  (defun eshell/v (&rest args)
+    "I'm so sorry."
+    (setq args (flatten-tree args))
+    (mapcar
+     #'find-file
+     args))
+
+  :config
+  (require 'evil-collection)
+  (evil-collection-eshell-setup))
+
+(use-package em-alias
+  :after eshell
+  :config
+  (eshell/alias "ls" "exa -l --color=always $*"))
+
+(use-package esh-help
+  :straight t
+  :demand t
+  :after eshell
+  :config
+  (setup-esh-help-eldoc))
 
 (provide 'shell.rc)
 ;;; shell.rc.el ends here

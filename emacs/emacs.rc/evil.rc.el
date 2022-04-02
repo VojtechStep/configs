@@ -1,9 +1,14 @@
-;;; evil.rc.el --- Configuration for evil-mode
+;;; evil.rc.el --- Configuration for evil-mode  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
-;; 
+;;
 
 ;;; Code:
+
+(require 'vs-utils.rc)
+(eval-when-compile
+  (require 'use-package))
+
 
 (defun vs/evil-move-noerror (orig-fun &rest args)
   "Wrap ORIG-FUN passing ARGS and catch inner errors.
@@ -18,61 +23,34 @@ in a 'condition-case. That in turn calls this advice and repeat infinitely."
     (error nil)))
 
 (use-package evil
-  :defines evil-motion-state-modes
   :straight t
   :demand
   :custom
-  (evil-want-keybinding nil)
-  (evil-want-Y-yank-to-eol t)
+  (evil-ex-substitute-global t)
   (evil-lookup-func #'vs/help-dwim)
-  (evil-symbol-word-search t)
+  (evil-respect-visual-line-mode t)
   (evil-shift-width tab-width)
-  (evil-insert-state-cursor '(bar . 5))
+  (evil-split-window-below t)
+  (evil-symbol-word-search t)
+  (evil-vsplit-window-right t)
+  (evil-want-Y-yank-to-eol t)
+  (evil-want-keybinding nil)
+  (evil-want-fine-undo t)
+  (evil-want-visual-char-semi-exclusive t)
+  (evil-echo-state nil)
+  ;; (evil-search-module 'evil-search)
+  (evil-undo-system 'undo-redo)
   :config
-  (dolist (m '(dired-mode
-               package-menu-mode
-               debugger-mode
-               use-package-statistics-mode
-               flycheck-error-list-mode))
-    (cl-pushnew m evil-motion-state-modes))
-  (dolist (m '(dired-mode-map
-               compilation-mode-map))
-    (evil-add-hjkl-bindings m))
   (dolist (f '(evil-line-move
                evil-backward-char
                evil-forward-char))
     (advice-add f :around #'vs/evil-move-noerror))
+  (evil-set-initial-state 'bluetooth-mode 'insert)
   (evil-mode))
 
-(use-package evil-magit
+(use-package evil-collection
   :straight t
-  :custom
-  (evil-magit-want-horizontal-movement t)
-  :hook
-  (magit-mode . (lambda ()
-                  (require 'evil-magit))))
-
-;; Cursor change in terminal
-(unless (display-graphic-p)
-  (use-package evil-terminal-cursor-changer
-    :straight t
-    :demand
-    :config
-    (setq evil-motion-state-cursor 'box)
-    (setq evil-visual-state-cursor 'box)
-    (setq evil-normal-state-cursor 'box)
-    (setq evil-insert-state-cursor 'bar)
-    (setq evil-emacs-state-cursor 'bar)
-    (etcc-on)))
-
-;; Evil in org mode
-(use-package evil-org
-  :straight t
-  :after (evil org)
-  :hook
-  (org-mode . evil-org-mode)
-  :config
-  (evil-org-set-key-theme))
+  :after evil)
 
 ;; Sniping
 (use-package evil-snipe
@@ -82,23 +60,45 @@ in a 'condition-case. That in turn calls this advice and repeat infinitely."
   (magit-mode . turn-off-evil-snipe-override-mode)
   :custom
   (evil-snipe-scope 'visible)
+  (evil-snipe-repeat-keys nil)
   :config
-  (evil-snipe-override-mode t))
+  (evil-snipe-mode))
 
 ;; Surround
 (use-package evil-surround
   :straight t
-  :demand
+  :hook
+  (vs/first-input . (lambda ()
+                      (require 'evil-surround)))
+  (org-mode
+   . (lambda ()
+       (cl-pushnew '(?$ . ("$" . "$"))
+                   evil-surround-pairs-alist)))
   :after evil
   :config
-  (global-evil-surround-mode 1))
-  
+  (global-evil-surround-mode))
+
 (use-package evil-goggles
   :straight t
-  :demand
+  :hook
+  (vs/first-input . (lambda ()
+                      (require 'evil-goggles)))
   :after evil
   :config
-  (evil-goggles-mode t))
+  (evil-goggles-mode))
+
+(use-package evil-commentary
+  :straight t
+  :hook
+  (vs/first-input . (lambda ()
+                      (require 'evil-commentary)))
+  :after evil
+  :config
+  (evil-commentary-mode))
+
+(use-package evil-numbers
+  :straight t
+  :after evil)
 
 (provide 'evil.rc)
 

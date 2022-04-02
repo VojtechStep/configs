@@ -1,9 +1,9 @@
-;;; auth.rc.el --- Configuration for auth-sources    -*- lexical-binding: t; -*-
+;;; nix.rc.el --- Configuration for managing Nix files  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020  Vojtech Stepancik
 
-;; Author: Vojtech Stepancik <adalbert@AdalbertDEV>
-;; Keywords: convenience, data, local, tools, unix
+;; Author: Vojtech Stepancik <vojtechstepancik@outlook.com>
+;; Keywords: tools, languages
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -20,19 +20,14 @@
 
 ;;; Commentary:
 
-;;
-
 ;;; Code:
 
 (eval-when-compile
   (require 'use-package))
 
-(use-package password-store
-  :straight t
-  :demand
-  :custom
-  (auth-sources '(password-store))
-  (epg-pinentry-mode 'loopback))
+(use-package nix-mode
+  :straight t)
 
-(provide 'auth.rc)
-;;; auth.rc.el ends here
+
+(provide 'nix.rc)
+;;; nix.rc.el ends here

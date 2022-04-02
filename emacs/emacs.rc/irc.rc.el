@@ -1,9 +1,9 @@
-;;; auth.rc.el --- Configuration for auth-sources    -*- lexical-binding: t; -*-
+;;; irc.rc.el --- Configuration for IRC clients      -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020  Vojtech Stepancik
 
 ;; Author: Vojtech Stepancik <adalbert@AdalbertDEV>
-;; Keywords: convenience, data, local, tools, unix
+;; Keywords: comm
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -27,12 +27,12 @@
 (eval-when-compile
   (require 'use-package))
 
-(use-package password-store
-  :straight t
-  :demand
+(use-package erc
   :custom
-  (auth-sources '(password-store))
-  (epg-pinentry-mode 'loopback))
+  (erc-rename-buffers t)
+  (erc-prompt-for-password nil)
+  (erc-kill-buffer-on-part t)
+  (erc-kill-server-buffer-on-quit t))
 
-(provide 'auth.rc)
-;;; auth.rc.el ends here
+(provide 'irc.rc)
+;;; irc.rc.el ends here

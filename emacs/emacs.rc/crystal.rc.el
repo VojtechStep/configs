@@ -1,9 +1,9 @@
-;;; auth.rc.el --- Configuration for auth-sources    -*- lexical-binding: t; -*-
+;;; crystal.rc.el --- Configuration for Crystal      -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020  Vojtech Stepancik
 
-;; Author: Vojtech Stepancik <adalbert@AdalbertDEV>
-;; Keywords: convenience, data, local, tools, unix
+;; Author: Vojtech Stepancik <stepavo2@fel.cvut.cz>
+;; Keywords: languages
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -27,12 +27,8 @@
 (eval-when-compile
   (require 'use-package))
 
-(use-package password-store
-  :straight t
-  :demand
-  :custom
-  (auth-sources '(password-store))
-  (epg-pinentry-mode 'loopback))
+(use-package crystal-mode
+  :straight t)
 
-(provide 'auth.rc)
-;;; auth.rc.el ends here
+(provide 'crystal.rc)
+;;; crystal.rc.el ends here

@@ -1,9 +1,12 @@
-;;; c_cpp.rc.el --- Configuration for C/C++ files
+;;; c_cpp.rc.el --- Configuration for C/C++ files  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
-;; 
+;;
 
 ;;; Code:
+
+(eval-when-compile
+  (require 'use-package))
 
 ;; (use-package ccls
 ;;   :defer t
@@ -20,23 +23,45 @@
 ;;                       :major-modes '(c++-mode c-mode)
 ;;                       :initialization-options "--clang-tidy"))
 
+(defvar clang-format '(clang-format "clang-format" "--assume-filename"
+                                    file))
+
+(use-package cc-mode
+  :hook
+  (cc-mode . apheleia-mode)
+  (java-mode . apheleia-mode)
+  :config
+  (when (require 'apheleia nil t)
+    (defvar apheleia-formatters)
+    (defvar apheleia-mode-alist)
+    (cl-pushnew clang-format apheleia-formatters)
+    (cl-pushnew '(c-mode . clang-format) apheleia-mode-alist)
+    (cl-pushnew '(c++-mode . clang-format) apheleia-mode-alist)
+    (cl-pushnew '(java-mode . clang-format) apheleia-mode-alist)))
+
+(use-package cmake-mode
+  :straight t)
+
 (defun vs/--cmake-ccls-setup-numbered-folder (base name &optional num)
   "Make a folder called NAME in BASE with the suffix NUM.
 If the folder already exists, increment NUM and try again."
   (let* ((new-name (concat name (if num (number-to-string num) "")))
 		 (new-path (expand-file-name new-name base)))
 	(if (file-exists-p new-path)
-		(cmake-ccls-setup--numbered-folder base name (if num (+1 num) 1))
+		(vs/--cmake-ccls-setup-numbered-folder base name (if num (1+ num) 1))
 	  new-path)))
 
 (defun vs/cmake-ccls-setup ()
   "Setup compilation of CMake projects."
   (interactive)
+  (require 'projectile)
+  (require 'f)
   (let* ((projroot (projectile-project-root))
          (cmakefile (expand-file-name "CMakeLists.txt" projroot))
          (compile-commands (expand-file-name "compile_commands.json" projroot))
          (ignore-file (expand-file-name ".ignore" projroot)))
     (when (and							; Only prompt if: There is a CMakeLists.txt AND it's readable AND there is no compile_commands.json AND the use agrees
+           (require 'f nil t)
            (file-readable-p cmakefile)
            (not (file-exists-p compile-commands))
            (y-or-n-p "Compile_commands.json missing.  Generate? "))

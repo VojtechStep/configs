@@ -1,7 +1,7 @@
-;;; prose.rc.el --- Configuration for modes that are not programming, but prose
+;;; prose.rc.el --- Configuration for modes that are not programming, but prose  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
-;; 
+;;
 
 ;;; Code:
 

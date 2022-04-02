@@ -1,9 +1,9 @@
-;;; auth.rc.el --- Configuration for auth-sources    -*- lexical-binding: t; -*-
+;;; csharp.rc.el --- Configuration for C#            -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020  Vojtech Stepancik
 
 ;; Author: Vojtech Stepancik <adalbert@AdalbertDEV>
-;; Keywords: convenience, data, local, tools, unix
+;; Keywords: languages
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -27,12 +27,29 @@
 (eval-when-compile
   (require 'use-package))
 
-(use-package password-store
+(use-package csharp-mode
   :straight t
-  :demand
-  :custom
-  (auth-sources '(password-store))
-  (epg-pinentry-mode 'loopback))
+  :hook
+  (csharp-mode . vs/csharp-local-setup)
+  :config
+  (defun vs/csharp-local-setup ()
+    (c-set-style "c#")))
 
-(provide 'auth.rc)
-;;; auth.rc.el ends here
+(use-package omnisharp
+  :straight t
+  :disabled
+  :custom
+  (omnisharp-expected-server-version "1.35.2")
+  :hook
+  (csharp-mode . omnisharp-mode)
+  :config
+  (setq-mode-local csharp-mode
+                   company-backends (cons 'company-omnisharp
+                                          company-backends))
+  (defun vs/restart-omnisharp-server ()
+    (interactive)
+    (omnisharp-stop-server)
+    (omnisharp-start-omnisharp-server)))
+
+(provide 'csharp.rc)
+;;; csharp.rc.el ends here
