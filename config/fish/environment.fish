@@ -1,5 +1,18 @@
+# Everything in this file should be idempotent, as it is sourced twice -
+# once for login, and once for regular sessions.
 
-set -U fish_user_paths
+# Keep in mind that exported variables (set with -x) are exported
+# to the lower fish sessions as well, and they go through dash.
+# That causes problems with path variables set at login,
+# then are serialized through dash when exec-ing the window manager,
+# and then modified again from fish, without telling it
+# that they are path variables.
+
+# As a rule of thumb, don't export fish internal variables,
+# specify --path everywhere it makes sense, use fish_add_path
+# for modifications of PATH, and check if an element exists
+# in a list variable with the contains builtin, before making
+# any --append or --prepend operations.
 
 # Remember to copy the variable names in Emacs
 set -xg CXX /usr/bin/clang++
@@ -22,9 +35,7 @@ set -xg DOCKER_CONFIG $XDG_CONFIG_HOME/docker
 set -xg CABAL_CONFIG $XDG_CONFIG_HOME/cabal
 set -xg CABAL_DIR $XDG_CACHE_HOME/cabal
 set -xg ASPELL_CONF "per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_CONFIG_HOME/aspell/en.pws; repl $XDG_CONFIG_HOME/aspell/en.prepl"
-set -xga PATH $XDG_CACHE_HOME/cargo/bin
-set -xga PATH ~/.local/bin
-set -xgp PATH ~/.local/bin/scripts
+fish_add_path -P $XDG_CACHE_HOME/cargo/bin ~/.local/bin ~/.local/bin/scripts
 set -xg TERMINFO $XDG_CONFIG_HOME/terminfo
 set -xg SCREENSHOT_DIR ~/Pictures/Screenshots
 set -xg PYTHONSTARTUP $XDG_CONFIG_HOME/python/startup.py
@@ -45,5 +56,5 @@ set -xg MANPAGER "sh -c 'col -bx | bat -l man -p --paging always'"
 set -xg HISTFILE $XDG_DATA_HOME/bash/history
 
 if test -f $__fish_config_dir/nix.fish
-  source $__fish_config_dir/nix.fish
+    source $__fish_config_dir/nix.fish
 end

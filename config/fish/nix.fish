@@ -1,6 +1,9 @@
 if set -q HOME USER
     set -l NIX_LINK $HOME/.nix-profile
-    set -x --append NIX_PATH $HOME/.nix-defexpr/channels
+    set -l chans "$HOME/.nix-defexpr/channels"
+    if not contains $chans $NIX_PATH
+        set -xa NIX_PATH $chans
+    end
     set -x NIX_PROFILES "/nix/var/nix/profiles/default $HOME/.nix-profile"
     for c in \
         /etc/ssl/certs/ca-certificates.crt \
@@ -14,10 +17,21 @@ if set -q HOME USER
             break
         end
     end
-    if set -q MANPATH
-        set -x --prepend MANPATH "$NIX_LINK/share/man"
+
+    set -l mans NIX_LINK/share/man
+    if set -q MANPATH and not contains $mans $MANPATH
+        set -xp MANPATH $mans
     end
-    set -x --prepend PATH "$NIX_LINK/bin"
-    set -x --prepend fish_complete_path "$NIX_LINK/share/fish/vendor_completions.d"
-    set -x --prepend fish_function_path "$NIX_LINK/share/fish/vendor_functions.d"
+
+    fish_add_path -P "$NIX_LINK/bin"
+
+    set -l compl "$NIX_LINK/share/fish/vendor_completions.d"
+    if not contains $compl $fish_complete_path
+        set -p fish_complete_path $compl
+    end
+
+    set -l func "$NIX_LINK/share/fish/vendor_functions.d"
+    if not contains $func $fish_function_path
+        set -p fish_function_path $func
+    end
 end
