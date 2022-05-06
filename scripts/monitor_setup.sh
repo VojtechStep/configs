@@ -12,7 +12,8 @@ if [ $MON_LAYOUT = auto ]; then
     MON_LAYOUT=single
   elif [ $MON_COUNT -eq 2 ]; then
     # xrandr --output DP1 --auto --primary --pos 0x0 --output eDP1 --mode 1920x1080 --pos 3840x0
-    xrandr --output DP1 --auto --primary --pos 1920x0 --output eDP1 --mode 1920x1080 --pos 0x0 --rotate inverted
+    # xrandr --output DP1 --auto --primary --pos 1920x0 --output eDP1 --mode 1920x1080 --pos 0x0 --rotate inverted
+    MON_LAYOUT=double-normal
   else
     echo Unsupported number of monitors: $MON_COUNT
   fi
