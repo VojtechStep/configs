@@ -5,7 +5,7 @@ end
 
 # Login shell
 if status --is-login
-    if test -z "$DISPLAY" -a $XDG_VTNR = 1
+    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
         exec startx "$XINITRC" -- -ardelay 300 -arinterval 30 &>"$XDG_DATA_HOME/xorg/Xorg.log"
     end
 end
