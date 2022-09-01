@@ -34,7 +34,8 @@ set -xg STACK_ROOT $XDG_DATA_HOME/stack
 set -xg DOCKER_CONFIG $XDG_CONFIG_HOME/docker
 set -xg CABAL_CONFIG $XDG_CONFIG_HOME/cabal
 set -xg CABAL_DIR $XDG_CACHE_HOME/cabal
-set -xg ASPELL_CONF "per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_CONFIG_HOME/aspell/en.pws; repl $XDG_CONFIG_HOME/aspell/en.prepl"
+# set -xg ASPELL_CONF "per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_CONFIG_HOME/aspell/en.pws; repl $XDG_CONFIG_HOME/aspell/en.prepl; dict-dir $HOME/.nix-profile/lib/aspell"
+set -xg ASPELL_CONF "per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; home-dir $XDG_DATA_HOME/aspell; dict-dir $HOME/.nix-profile/lib/aspell"
 fish_add_path -P $XDG_CACHE_HOME/cargo/bin ~/.local/bin ~/.local/bin/scripts
 set -xg TERMINFO $XDG_CONFIG_HOME/terminfo
 set -xg SCREENSHOT_DIR ~/Pictures/Screenshots
