@@ -84,4 +84,7 @@ if status --is-interactive
     abbr -a scu systemctl --user
     abbr -a ssc sudo systemctl
     abbr -a bt bluetoothctl
+
+    abbr -a udm udisksctl mount
+    abbr -a udu udisksctl unmount
 end

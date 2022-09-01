@@ -20,6 +20,8 @@ SETUVAR _fish_abbr_scu:systemctl\x20\x2d\x2duser
 SETUVAR _fish_abbr_serve:miniserve\x20\x2d\x2dindex\x20index\x2ehtml
 SETUVAR _fish_abbr_shutdown:systemctl\x20poweroff
 SETUVAR _fish_abbr_ssc:sudo\x20systemctl
+SETUVAR _fish_abbr_udm:udisksctl\x20mount
+SETUVAR _fish_abbr_udu:udisksctl\x20unmount
 SETUVAR _fish_abbr_v:nvim
 SETUVAR _fish_abbr_vf:nvim\x20/home/adalbert/\x2econfig/fish/config\x2efish
 SETUVAR _fish_abbr_vv:nvim\x20/home/adalbert/\x2econfig/nvim/init\x2evim
