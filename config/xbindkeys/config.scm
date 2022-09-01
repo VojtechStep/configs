@@ -108,7 +108,7 @@
 
   (xbindkey (WM 'semicolon) "rofi -show run -modi run")
   (xbindkey (WM 'Shift 'semicolon) "rofi -show ssh -modi ssh")
-  (xbindkey (WM 'v) "rofi -show emoji -modi emoji")
+  (xbindkey (WM 'v) "rofi -show emoji -modi emoji -emoji-mode copy")
   (xbindkey (WM 'slash) "rofi-systemctl-runner")
 
   (xbindkey (WM 'space) "xkblayout-state set +1")
