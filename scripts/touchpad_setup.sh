@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ID=$(xinput list | rg Touchpad | cut -f2 | cut -d"=" -f2)
+ID=$(xinput list | rg "Touchpad|Synaptics" | cut -f2 | cut -d"=" -f2)
 
 xinput --set-prop $ID 'libinput Accel Speed' 0.5
 xinput --set-prop $ID 'libinput Tapping Enabled' 1
