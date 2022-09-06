@@ -2,6 +2,13 @@
 
 unclutter &
 
+environment_vars="DBUS_SESSION_BUS_ADDRESS DISPLAY SSH_AUTH_SOCK XAUTHORITY XG_DATA_DIRS XDG_RUNTIME_DIR XDG_SESSION_ID"
+if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
+  eval $(dbus-launch --exit-with-session --sh-syntax)
+fi
+systemctl --user import-environment $environment_vars
+dbus-update-activation-environment $environment_vars
+
 display_adj.sh = &
 touchpad_setup.sh &
 touchscreen_setup.sh &

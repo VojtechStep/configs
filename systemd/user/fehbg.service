@@ -2,5 +2,4 @@
 Description=Changes wallpaper to a random one
 
 [Service]
-Environment=DISPLAY=:0 XAUTHORITY=/run/user/1000/Xauthority
 ExecStart=/usr/bin/feh --no-fehbg --bg-fill --randomize %h/Pictures/Wallpapers/current
