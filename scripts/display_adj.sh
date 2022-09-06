@@ -10,7 +10,7 @@ else
 fi
 
 adjust(){
-	xrandr | rg -w connected | cut -d" " -f1 | xargs -L1 -I{} xrandr --output {} --brightness $LEVEL
+	xrandr | rg -w connected | cut -d" " -f1 | xargs -I{} xrandr --output {} --brightness $LEVEL
 	echo $LEVEL > $CONFIG
 }
 
