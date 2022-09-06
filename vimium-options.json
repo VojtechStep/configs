@@ -1,0 +1,38 @@
+{
+  "settingsVersion": "1.67",
+  "exclusionRules": [
+    {
+      "pattern": "https?://play.rust-lang.org/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://chriskempson.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://magic-trace.org/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://ui.perfetto.dev/*",
+      "passKeys": ""
+    },
+  ],
+  "filterLinkHints": false,
+  "waitForEnterForFilteredHints": true,
+  "hideHud": false,
+  "keyMappings": "unmap J\nunmap K\nmap J nextTab\nmap K previousTab\n\nunmap d\nunmap u\nunmap x\nunmap X\nmap d removeTab\nmap u restoreTab\n\nmap <C-d> scrollPageDown\nmap <C-u> scrollPageUp\n\nunmap b\nmap <Space>b Vomnibar.activateTabSelection\n\nmap <Space><Space> visitPreviousTab\n\nunmap <a-f>\nmap ;f LinkHints.activateModeWithQueue\nmap ;d LinkHints.activateModeToDownloadLink\nmap ;y LinkHints.activateModeToCopyLinkUrl\n\n\nmap gd0 closeTabsOnLeft\nmap gd$ closeTabsOnRight\nmap gdd closeOtherTabs",
+  "linkHintCharacters": "sadfjklewcmpgh",
+  "linkHintNumbers": "0123456789",
+  "newTabUrl": "about:newtab",
+  "nextPatterns": "next,more,newer,>,›,→,»,≫,>>",
+  "previousPatterns": "prev,previous,back,older,<,‹,←,«,≪,<<",
+  "regexFindMode": false,
+  "ignoreKeyboardLayout": false,
+  "scrollStepSize": 60,
+  "smoothScroll": false,
+  "grabBackFocus": true,
+  "searchEngines": "",
+  "searchUrl": "https://duckduckgo.com/?q=",
+  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFF785),\n  color-stop(100%,#FFC542));\nborder: 1px solid #E3BE23;\n}\n\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: black;\nfont-weight: bold;\nfont-size: 12px;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\n}"
+}
