@@ -29,7 +29,7 @@ EOF
     if [ x"$action" = x"service" ]; then
       export service=$(echo $selected | cut -d" " -f1)
       printf "\000prompt\037%s\n" "$service"
-      echo -n $SCTL_ACTIONS | awk '{printf $1 "\000info\037%s %s\n", ENVIRON["service"], ENVIRON["kind"]}'
+      printf $SCTL_ACTIONS | awk '{printf $1 "\000info\037%s %s\n", ENVIRON["service"], ENVIRON["kind"]}'
     elif [ x"$selected" = x"status" ]; then
       do_cmd alacritty --class rofi-systemd-status -e systemctl "--$kind" status "$action"
     else
