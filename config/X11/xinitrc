@@ -9,13 +9,13 @@ fi
 systemctl --user import-environment $environment_vars
 dbus-update-activation-environment $environment_vars
 
+systemctl --user --no-block start cellar-xsession.target
+
 display_adj.sh = &
 touchpad_setup.sh &
 touchscreen_setup.sh &
 # dwm_status.sh &
 setxkbmap -option caps:ctrl_modifier -layout us,us,cz -variant ,colemak,qwerty
-
-systemctl --user start fehbg.timer
 
 brave &
 # alacritty &
