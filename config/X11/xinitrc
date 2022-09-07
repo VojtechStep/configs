@@ -1,6 +1,7 @@
 #!/bin/sh
 
 unclutter &
+monitor_setup.sh
 
 environment_vars="DBUS_SESSION_BUS_ADDRESS DISPLAY SSH_AUTH_SOCK XAUTHORITY XG_DATA_DIRS XDG_RUNTIME_DIR XDG_SESSION_ID"
 if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
@@ -25,5 +26,4 @@ brave &
 xss-lock slock &
 xbindkeys -fg "$XDG_CONFIG_HOME"/xbindkeys/config.scm
 
-monitor_setup.sh
 exec bspwm
