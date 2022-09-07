@@ -16,7 +16,7 @@
     {
       "pattern": "https?://ui.perfetto.dev/*",
       "passKeys": ""
-    },
+    }
   ],
   "filterLinkHints": false,
   "waitForEnterForFilteredHints": true,
