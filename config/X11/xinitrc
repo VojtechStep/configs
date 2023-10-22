@@ -2,7 +2,9 @@
 
 monitor_setup.sh
 
-environment_vars="DBUS_SESSION_BUS_ADDRESS DISPLAY SSH_AUTH_SOCK XAUTHORITY XG_DATA_DIRS XDG_RUNTIME_DIR XDG_SESSION_ID"
+environment_vars="DBUS_SESSION_BUS_ADDRESS DISPLAY SSH_AUTH_SOCK"
+environment_vars="$environment_vars XAUTHORITY XDG_DATA_DIRS XDG_RUNTIME_DIR XDG_SESSION_ID"
+environment_vars="$environment_vars PASSWORD_STORE_DIR WINIT_X11_SCALE_FACTOR GNUPGHOME"
 if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
   eval $(dbus-launch --exit-with-session --sh-syntax)
 fi
@@ -14,15 +16,11 @@ systemctl --user --no-block start cellar-xsession.target
 display_adj.sh = &
 touchpad_setup.sh &
 touchscreen_setup.sh &
-# dwm_status.sh &
 setxkbmap -option caps:ctrl_modifier -layout us,us,cz -variant ,colemak,qwerty
 
 brave &
-# alacritty &
 # wait for emacs in a subshell
 (systemctl --user start emacs && emacsclient -c) &
-# oneko -rv &
 xss-lock slock &
-xbindkeys -fg "$XDG_CONFIG_HOME"/xbindkeys/config.scm
 
 exec bspwm
