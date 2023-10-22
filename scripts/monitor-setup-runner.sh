@@ -1,4 +1,4 @@
 #!/bin/sh
 
-layout=$(echo "auto\ndouble-invert\ndouble-normal\ndouble-lab\nduplicate\nsingle" | rofi -dmenu)
+layout=$(monitor_setup.sh --list-modes | rofi -dmenu)
 monitor_setup.sh $layout
