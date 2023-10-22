@@ -20,7 +20,7 @@ run() {
         dir=$HOME
     fi
     # echo $dir | exec xargs $@
-    exec $@ $dir
+    exec "$@" "$dir"
 }
 
 # Get active window and corresponding process
@@ -30,7 +30,7 @@ parent=$(xprop -root _NET_ACTIVE_WINDOW \
                | rg -e ' = (\d+)' -or '$1')
 
 if [ x$parent = x ]; then
-    run $@
+    run "$@"
     exit 2
 fi
 
@@ -58,5 +58,5 @@ else
     dir=$(readlink -e /proc/$children/cwd)
 fi
 
-run $@
+run "$@"
 exit 2
