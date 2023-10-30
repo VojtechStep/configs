@@ -5,6 +5,7 @@ monitor_setup.sh
 environment_vars="DBUS_SESSION_BUS_ADDRESS DISPLAY SSH_AUTH_SOCK"
 environment_vars="$environment_vars XAUTHORITY XDG_DATA_DIRS XDG_RUNTIME_DIR XDG_SESSION_ID"
 environment_vars="$environment_vars PASSWORD_STORE_DIR WINIT_X11_SCALE_FACTOR GNUPGHOME"
+environment_vars="$environment_vars FONTCONFIG_PATH FONTCONFIG_FILE"
 if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
   eval $(dbus-launch --exit-with-session --sh-syntax)
 fi
